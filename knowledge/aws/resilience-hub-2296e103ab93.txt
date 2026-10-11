@@ -1,0 +1,12 @@
+AWS Resilience Hub
+Troubleshooting Next generation Resilience Hub
+This section provides solutions for common issues you might encounter when using
+  the next generation of Resilience Hub.
+Topics
+Dependency discovery issues
+Failure mode assessment issues
+IAM and permissions errors
+AWS Organizations configuration issues
+Resource discovery issues
+Resilience testing issues
+Known issues and workarounds

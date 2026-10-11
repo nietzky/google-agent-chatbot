@@ -1,0 +1,14 @@
+Amazon Security Lake
+Troubleshooting issues in Security Lake
+If you encounter issues when working with Amazon Security Lake, use the following troubleshooting resources.
+The following topics provide troubleshooting advice for errors and issues that you might
+        encounter related to data lake status, Lake Formation, querying in Amazon Athena, AWS Organizations and IAM. If you find an issue that is not listed here, you can use the
+Feedback
+button on this page to report it.
+Consult the following topics if you encounter issues while using Security Lake.
+Topics
+Troubleshooting data lake status
+Troubleshooting Lake Formation issues
+Troubleshooting querying in Amazon Athena
+Troubleshooting Organizations issues
+Troubleshooting Amazon Security Lake identity and access

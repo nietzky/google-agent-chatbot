@@ -1,0 +1,12 @@
+Amazon Timestream
+For similar capabilities to Amazon Timestream for LiveAnalytics, consider Amazon Timestream for InfluxDB. It offers simplified
+   data ingestion and single-digit millisecond query response times for real-time analytics. Learn more
+here
+.
+Troubleshooting
+This section contains information on troubleshooting Timestream for LiveAnalytics.
+Topics
+Handling WriteRecords throttles
+Handling rejected records
+Troubleshooting UNLOAD from Timestream for LiveAnalytics
+Timestream for LiveAnalytics specific error codes

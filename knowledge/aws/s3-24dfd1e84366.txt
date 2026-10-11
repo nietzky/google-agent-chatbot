@@ -1,0 +1,41 @@
+Amazon Simple Storage Service
+Troubleshooting Mountpoint
+Mountpoint for Amazon S3 is backed by Support. If you need assistance, contact the
+AWS Support Center
+.
+You can also review and submit Mountpoint
+Issues
+on
+        GitHub.
+If you discover a potential security issue in this project, we ask that you notify AWS
+      Security through our
+vulnerability reporting page
+. Do not create a public GitHub
+      issue.
+If your application behaves unexpectedly with Mountpoint, you can inspect your log
+      information to diagnose the problem.
+Logging
+By default, Mountpoint emits high-severity log information to
+syslog
+.
+To view logs on most modern Linux distributions, including Amazon Linux, run the
+      following
+journald
+command:
+journalctl -e SYSLOG_IDENTIFIER=mount-s3
+On other Linux systems,
+syslog
+entries are likely written to a
+      file such as
+/var/log/syslog
+.
+You can use these logs to troubleshoot your application. For example, if your application
+      tries to overwrite an existing file, the operation fails, and you will see a line similar to
+      the following in the log:
+[WARN] open
+{
+req=12 ino=2}: mountpoint_s3::fuse: open failed: inode error: inode 2 (full key "README.md") is not writable
+For more information, see Mountpoint for Amazon S3
+Logging
+on
+        GitHub.

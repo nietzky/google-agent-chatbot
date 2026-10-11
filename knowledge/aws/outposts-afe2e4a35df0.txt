@@ -1,0 +1,212 @@
+AWS Outposts
+Troubleshooting capacity task issues
+Review the following known issues to resolve an issue related to capacity management in a
+      new order. If you do not see your issue listed, contact Support.
+Order
+oo-xxxxxx
+is not associated with Outpost ID
+op-xxxxx
+This issue occurs when you use the AWS CLI or API to run the
+StartCapacityTask
+and the Outpost ID in the request does not match
+        the Outpost ID in the order.
+To resolve this issue:
+Sign in to AWS.
+Open the AWS Outposts console at
+https://console.aws.amazon.com/outposts/
+.
+From the navigation pane, choose
+Orders
+.
+Select the order and verify that the order status is one of the following:
+PREPARING
+,
+IN_PROGRESS
+, or
+ACTIVE
+.
+Note the Outpost ID in the order.
+Enter the correct Outpost ID in the
+StartCapacityTask
+API
+            request.
+The capacity plan includes instance types that are not supported
+This issue occurs when you use the AWS CLI or API to create or modify the capacity task
+        and the request contains unsupported instances types.
+To resolve this issue, use the console or CLI.
+Use the console
+Sign in to AWS.
+Open the AWS Outposts console at
+https://console.aws.amazon.com/outposts/
+.
+From the navigation pane, choose
+Capacity task
+.
+Use the
+Upload a capacity configuration
+option to upload a JSON
+            with the same list of instance types.
+The console displays an error message with the list of supported instance
+            types.
+Correct the request to remove the unsupported instance types.
+Create or modify the capacity task on the console using the corrected JSON or use
+            the CLI or API with this corrected list of instance types.
+Use the CLI
+Use the
+GetOutpostSupportedInstanceTypes
+command to see the list of supported
+            instance types.
+Create or modify the capacity task with the correct list of instance types.
+No Outpost with Outpost ID
+op-xxxxx
+This issue occurs when you use the AWS CLI or API to run the
+StartCapacityTask
+and the request contains an Outpost ID that is
+        not valid for one of the following reasons:
+The Outpost is in a different AWS Region.
+You do not have permissions to this Outpost.
+The Outpost ID is incorrect.
+To resolve this issue:
+Note the AWS Region that you used in the
+StartCapacityTask
+API
+            request.
+Use the
+ListOutposts
+API action to get a list of Outposts that you own
+            in the AWS Region.
+Check if the Outpost ID is listed.
+Enter the correct Outpost ID in the
+StartCapacityTask
+request.
+If you do not find the Outpost ID, use the
+ListOutposts
+API action
+            again to check if the Outpost exists in a different AWS Region.
+Active CapacityTask cap-
+XXXX
+already found for Outpost op-
+XXXX
+This issue occurs when you use the AWS Outposts console or API to run
+StartCapacityTask
+on an Outpost and there is already a running capacity task for
+        the Outpost. A capacity task is considered running if it has any of the following statuses:
+REQUESTED
+,
+IN_PROGRESS
+,
+WAITING_FOR_EVACUATION
+, or
+CANCELLATION_IN_PROGRESS
+.
+To resolve this issue, use the AWS Outposts console or CLI.
+Use the console
+Sign in to AWS.
+Open the AWS Outposts console at
+https://console.aws.amazon.com/outposts/
+.
+From the navigation pane, choose
+Capacity tasks
+.
+Ensure that there are no running capacity tasks for the OutpostId.
+If there are running capacity tasks for the OutpostId, wait for them to terminate,
+            or cancel them if desired.
+When there no running capacity tasks for the requested OutpostId, retry your request
+            to create the capacity task.
+Use the CLI
+Use the
+ListCapacityTasks
+command to find running capacity tasks for the
+            Outpost.
+Wait for all running capacity tasks to terminate, or cancel them if desired.
+When there no running capacity tasks for the requested OutpostId, retry your request
+            to create the capacity task.
+Active CapacityTask cap-
+XXXX
+already found for Asset
+XXXX
+on Outpost op-XXXX
+This issue occurs when you use the AWS Outposts console or API to run
+StartCapacityTask
+on an asset and there is already a running capacity task for
+        the asset. A capacity task is considered running if it has any of the following statuses:
+REQUESTED
+,
+IN_PROGRESS
+,
+WAITING_FOR_EVACUATION
+, or
+CANCELLATION_IN_PROGRESS
+.
+To resolve this issue, use the AWS Outposts console or CLI.
+Use the console
+Sign in to AWS.
+Open the AWS Outposts console at
+https://console.aws.amazon.com/outposts/
+.
+From the navigation pane, choose
+Capacity tasks
+.
+Ensure that there are no running capacity tasks for the OutpostId and no running
+            asset-level capacity Tasks for the AssetId.
+If there are running capacity tasks, wait for them to terminate, or cancel them if
+            desired.
+When there no running capacity tasks, retry your request to create the capacity
+            task.
+Use the CLI
+Use the
+ListCapacityTasks
+command to find running capacity tasks for the OutpostID
+            and AssetID.
+Ensure that there are no running Outpost-level capacity tasks for the OutpostId, and
+            no running asset-level capacity Tasks for the AssetId.
+If there are running capacity tasks, wait for them to terminate, or cancel them if
+            desired.
+Retry your request to create the capacity task.
+AssetId=
+XXXX
+is not valid for Outpost=op-
+XXXX
+This issue occurs when you use the AWS Outposts console or API to run
+StartCapacityTask
+on an asset and the AssetID is not valid for one of the
+        following reasons:
+The asset is not associated with the Outpost.
+The asset is isolated.
+To resolve this issue, use the AWS Outposts console or CLI.
+Use the console
+Sign in to AWS.
+Open the AWS Outposts console at
+https://console.aws.amazon.com/outposts/
+.
+Choose
+Rack view
+for the Outpost.
+Verify that the requested AssetId is associated with the Outpost, and that it is not
+            marked as an Isolated Host.
+If the Asset is isolated, this may be because a capacity task is running on it.
+                You can navigate to the capacity tasks panel and check if there are any running
+                Outpost or asset-level tasks for the OutpostId and AssetId. If there are, then wait
+                for the task to terminate and for the asset to become available again.
+If there are no running capacity tasks for an isolated asset, then the asset may
+                be degraded.
+After you verify that the asset exists and is in a valid state, retry your request
+            to create the capacity task.
+Use the CLI
+Use the
+ListAssets
+command to
+            find the assets associated with the OutpostID.
+Verify that the requested AssetId is associated with the Outpost, and that its State
+            is
+ACTIVE
+.
+If the asset State is not ACTIVE, this may be because a capacity task is
+                running on it. Use the
+ListCapacityTasks
+command to determine if there are running
+                Outpost or asset-level tasks for the OutpostId and AssetId. If there are, then wait
+                for the task to terminate and for the asset to become ACTIVE again.
+If there are no running capacity tasks for an isolated asset, then the asset may be degraded.
+After you verify that the asset exists and is in a valid state, retry your request
+            to create the capacity task.

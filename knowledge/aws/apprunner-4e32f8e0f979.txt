@@ -1,0 +1,58 @@
+AWS App Runner
+AWS App Runner is no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see
+AWS App Runner availability
+        change
+.
+Troubleshooting App Runner identity and access
+Use the following information to help you diagnose and fix common issues that you might encounter when working with AWS App Runner and IAM.
+For other App Runner security topics, see
+Security in App Runner
+.
+Topics
+I'm not authorized to perform an action in App Runner
+I want to allow people outside of my AWS account to access my App Runner resources
+I'm not authorized to perform an action in App Runner
+If the AWS Management Console tells you that you're not authorized to perform an action, contact your administrator for assistance. Your administrator is the
+        person that provided you with your AWS sign-in credentials.
+The following example error occurs when an IAM user named
+marymajor
+tries to use the console to view details about an App Runner service
+        but doesn't have
+apprunner:DescribeService
+permissions.
+User: arn:aws:iam::123456789012:user/marymajor is not authorized to perform: apprunner:DescribeService on resource:
+my-example-service
+In this case, Mary asks her administrator to update her policies to allow her to access the
+my-example-service
+resource using the
+apprunner:DescribeService
+action.
+I want to allow people outside of my AWS account to access my App Runner resources
+You can create a role that users in other accounts or people outside of your organization can use to access your resources. You can specify who
+            is trusted to assume the role. For services that support resource-based policies or access control lists (ACLs), you can use those policies to grant
+            people access to your resources.
+To learn more, consult the following:
+To learn whether App Runner supports these features, see
+How App Runner works with IAM
+.
+To learn how to provide access to your resources across AWS accounts that you own, see
+Providing access to an IAM user in another AWS account that you
+                     own
+in the
+IAM User Guide
+.
+To learn how to provide access to your resources to third-party AWS accounts, see
+Providing access to AWS accounts owned by third parties
+in the
+IAM User Guide
+.
+To learn how to provide access through identity federation, see
+Providing access to externally authenticated users (identity federation)
+in the
+IAM User Guide
+.
+To learn the difference between using roles and resource-based policies for cross-account access, see
+Cross account resource access in IAM
+in the
+IAM User Guide
+.

@@ -1,0 +1,17 @@
+AWS Glue
+Troubleshooting AWS Glue
+If you encounter issues when working with AWS Glue, consult the topics in this section.
+For Apache Spark troubleshooting in AWS Glue, see
+Generative AI troubleshooting for Apache Spark in AWS Glue
+which provides AI-powered assistance for diagnosing and resolving Spark job issues.
+Transform your Apache Spark troubleshooting with our AI-powered Troubleshooting Agent, now supporting all major deployment modes including AWS Glue, Amazon EMR-EC2, Amazon EMR-Serverless and Amazon SageMaker AI Notebooks. This powerful agent eliminates complex debugging processes by combining natural language interactions, real-time workload analysis, and smart code recommendations into a seamless experience. For implementation details, refer to
+What is Apache Spark Troubleshooting Agent for Amazon EMR
+.
+Topics
+Gathering AWS Glue troubleshooting information
+Troubleshooting Glue common setup errors
+Generating help with Q
+Crawler errors when the crawler is using Lake Formation permissions
+Troubleshooting AWS Glue for Ray errors from logs
+AWS Glue machine learning exceptions
+AWS Glue quotas

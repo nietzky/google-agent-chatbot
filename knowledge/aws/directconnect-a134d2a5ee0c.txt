@@ -1,0 +1,26 @@
+AWS Direct Connect
+Troubleshoot layer 2 (data link) issues
+If your Direct Connect physical connection is up but your virtual interface is down, use the
+            following steps to troubleshoot the issue.
+If you cannot ping the Amazon peer IP address, verify that your peer IP
+                    address is configured correctly and in the correct VLAN. Ensure that the IP
+                    address is configured in the VLAN subinterface and not the physical interface
+                    (for example, GigabitEthernet0/0.123 instead of GigabitEthernet0/0).
+Verify if the router has a MAC address entry from the AWS endpoint in your
+                    address resolution protocol (ARP) table.
+Ensure that any intermediate devices between endpoints have VLAN trunking
+                    enabled for your 802.1Q VLAN tag. ARP cannot be established on the AWS side
+                    until AWS receives tagged traffic.
+Clear your or your provider's ARP table cache.
+If the above steps do not establish ARP or you still cannot ping the Amazon
+                    peer IP,
+contact AWS Support
+.
+The following flow chart contains the steps to diagnose issues with the data
+            link.
+If the BGP session is still not established after verifying these steps, see
+Troubleshoot layer 3/4 (Network/Transport) issues
+. If the BGP session is established
+            but you are experiencing routing issues, see
+Troubleshoot routing issues
+.

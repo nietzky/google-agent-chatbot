@@ -1,0 +1,19 @@
+AWS Virtual Private Network
+Troubleshooting AWS Site-to-Site VPN customer gateway device
+When troubleshooting issues with your customer gateway device, it's important to have a structured approach. The first two topics in this section provide generalized flowcharts for troubleshooting issues when using a device configured for dynamic routing (BGP enabled), and a device configured for static routing (without BGP enabled), respectively. Following those topics are device-specific troubleshooting guides for Cisco, Juniper, and Yamaha customer gateway devices.
+In addition to the topics in this section, enabling
+AWS Site-to-Site VPN logs
+can be very helpful for troubleshooting and resolving VPN connectivity issues. For general testing instructions, also see
+Test an AWS Site-to-Site VPN connection
+.
+Topics
+Device with BGP
+Device without BGP
+Cisco ASA
+Cisco IOS
+Cisco IOS without BGP
+Juniper JunOS
+Juniper ScreenOS
+Yamaha
+Additional resources
+Amazon VPC forum

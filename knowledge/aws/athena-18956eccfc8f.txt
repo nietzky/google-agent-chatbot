@@ -1,0 +1,14 @@
+Amazon Athena
+Troubleshoot Athena for Spark
+Use the following information to troubleshoot issues you may have when using notebooks and
+        sessions on Athena.
+Topics
+Learn about known issues in Athena for Spark
+Troubleshoot Spark-enabled workgroups
+Use the Spark EXPLAIN statement to troubleshoot Spark SQL
+Log Spark application events in Athena
+Use CloudTrail to troubleshoot Athena notebook API calls
+Overcome the 68k code block size limit
+Troubleshoot session errors
+Troubleshoot table errors
+Get support

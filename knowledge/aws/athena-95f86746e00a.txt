@@ -1,0 +1,18 @@
+Amazon Athena
+Troubleshoot JSON queries
+For help on troubleshooting issues with JSON-related queries, see
+JSON related errors
+or consult the following
+        resources:
+I
+                    get errors when I try to read JSON data in Amazon Athena
+How do I resolve "HIVE_CURSOR_ERROR: Row is not a valid JSON object -
+                    JSONException: Duplicate key" when reading files from AWS Config in
+                    Athena?
+The SELECT COUNT query in Amazon Athena returns only one record even though the
+                    input JSON file has multiple records
+How
+                    can I see the Amazon S3 source file for a row in an Athena table?
+See also
+Considerations and limitations for SQL queries in Amazon Athena
+.

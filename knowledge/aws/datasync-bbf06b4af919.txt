@@ -1,0 +1,9 @@
+AWS DataSync
+Troubleshooting AWS DataSync issues
+Use the following information to troubleshoot AWS DataSync issues and errors.
+Topics
+Troubleshooting issues with DataSync agents
+Troubleshooting issues with DataSync locations
+Troubleshooting issues with DataSync tasks
+Troubleshooting data verification issues
+Troubleshooting higher than expected S3 storage costs with DataSync

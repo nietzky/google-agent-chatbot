@@ -1,0 +1,41 @@
+AWS ParallelCluster
+AWS ParallelCluster troubleshooting
+The following sections provide troubleshooting tips for issues that might occur while using
+    AWS ParallelCluster. The AWS ParallelCluster community maintains a Wiki page that provides many
+    troubleshooting tips on the
+AWS ParallelCluster GitHub Wiki
+. For a list of known issues, see
+Known
+    issues
+.
+Starting with AWS ParallelCluster version 3.16.0, you can also run the on-node diagnostics tool
+pcluster-diag
+to have a set of
+   health conditions verified for you on a running cluster. For more information, see
+Troubleshooting with pcluster-diag
+.
+Topics
+Troubleshooting with pcluster-diag
+Trying to create a cluster
+Trying to run a job
+Trying to update a cluster
+Trying to access storage
+Trying to delete a cluster
+Trying to upgrade the AWS ParallelCluster API stack
+Seeing errors in compute node initializations
+Troubleshooting cluster health metrics
+Troubleshooting cluster deployment issues
+Troubleshooting cluster deployment using Terraform
+Troubleshooting scaling issues
+Placement groups and instance launch issues
+Replacing directories
+Troubleshooting issues in Amazon DCV
+Troubleshooting issues in clusters with AWS Batch integration
+Troubleshooting multi-user integration with Active Directory
+Troubleshooting custom AMI issues
+Troubleshooting a cluster update timeout when cfn-hup isn't running
+Network troubleshooting
+Cluster update failed on onNodeUpdated custom action
+Seeing errors with custom Slurm configuration
+Cluster alarms
+Resolving OS configuration changes that cause errors or failures

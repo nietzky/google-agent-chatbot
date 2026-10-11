@@ -1,0 +1,17 @@
+AWS App Runner
+AWS App Runner is no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see
+AWS App Runner availability
+        change
+.
+Troubleshooting
+This chapter provides troubleshooting steps for common errors and issues that you might encounter while using your AWS App Runner service. The error messages can
+ appear on the console, API, or the Logs tab of your service page.
+For more troubleshooting advice and answers to common support questions, visit the
+Knowledge Center
+.
+Topics
+When the service fails to create
+Custom domain names
+HTTP/HTTPS request routing error
+When the service fails to connect to Amazon RDS or downstream service
+When there are not enough IP addresses for launching instances or scaling

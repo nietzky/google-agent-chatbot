@@ -1,0 +1,26 @@
+AWS Network Firewall
+Troubleshooting AWS Network Firewall
+The topics in this chapter can help you troubleshoot problems with configuring and using AWS Network Firewall.
+Contents
+Troubleshooting general issues in AWS Network Firewall
+Firewall endpoint creation or deletion fails
+Availability Zone is unsupported
+How do I check if I have asymmetric routing?
+I'm using Network Firewall with AWS Transit Gateway and Network Firewall is dropping traffic
+High latency and intermittent packet drops when traffic passes through Network Firewall
+How Network Firewall scaling works
+Troubleshooting logging in AWS Network Firewall
+My firewall isn't logging all traffic that matches pass action rules
+I don't see Alert logs that match drop action rules in my rule group
+I don’t see any TLS logs even though I have TLS logging enabled
+Troubleshooting rules in AWS Network Firewall
+Rules with the HOME_NET variable are not working as expected with managed rule groups
+I created a rule to allow only outbound traffic from HOME_NET to EXTERNAL_NET, but EXTERNAL_NET was also able to initiate a connection back to HOME_NET. How do I prevent this from happening?
+I'm using strict ordering, but stateful rules near the bottom of my ruleset appear to be handling traffic before rules near the top of my ruleset
+I've configured a drop action rule but traffic still goes through the firewall
+I have a rule that is intermittently not matching when I think it should
+Troubleshooting TLS inspection in AWS Network Firewall
+Outbound TLS - Blocked connections to servers with revoked certificates
+Outbound TLS - Passing traffic for specific target server with revoked certificates by adjusting scope
+Troubleshooting connection issues with AWS service endpoints (including the AWS Systems Manager agent)
+Troubleshooting TLS - Connections dropping or resetting

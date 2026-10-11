@@ -1,0 +1,18 @@
+AWS Lake Formation
+Getting started with Lake Formation
+If you haven't signed up for AWS or need assistance getting started, be sure to complete the following tasks.
+Topics
+Complete initial AWS configuration tasks
+Set up AWS Lake Formation
+Upgrading AWS Glue data permissions to the AWS Lake Formation model
+AWS Lake Formation and interface VPC endpoints (AWS PrivateLink)
+Complete initial AWS configuration tasks
+To use AWS Lake Formation you must first complete the following tasks:
+Topics
+Sign up for an AWS account
+Sign up for an AWS account
+To get started with AWS, you need an AWS account. For information about creating an AWS account, see
+Getting started with an AWS account
+in the
+AWS Account Management Reference Guide
+.

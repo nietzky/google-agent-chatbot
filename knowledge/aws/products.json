@@ -1,0 +1,780 @@
+[
+  {
+    "id": "ec2",
+    "name": "Amazon Elastic Compute Cloud",
+    "docs_url": "https://docs.aws.amazon.com/ec2/",
+    "aliases": [
+      "ec2"
+    ]
+  },
+  {
+    "id": "lambda",
+    "name": "AWS Lambda",
+    "docs_url": "https://docs.aws.amazon.com/lambda/",
+    "aliases": [
+      "lambda"
+    ]
+  },
+  {
+    "id": "lightsail",
+    "name": "Amazon Lightsail",
+    "docs_url": "https://docs.aws.amazon.com/lightsail/",
+    "aliases": [
+      "lightsail"
+    ]
+  },
+  {
+    "id": "batch",
+    "name": "AWS Batch",
+    "docs_url": "https://docs.aws.amazon.com/batch/",
+    "aliases": []
+  },
+  {
+    "id": "elastic-beanstalk",
+    "name": "AWS Elastic Beanstalk",
+    "docs_url": "https://docs.aws.amazon.com/elastic-beanstalk/",
+    "aliases": [
+      "elastic beanstalk"
+    ]
+  },
+  {
+    "id": "apprunner",
+    "name": "AWS App Runner",
+    "docs_url": "https://docs.aws.amazon.com/apprunner/",
+    "aliases": [
+      "apprunner"
+    ]
+  },
+  {
+    "id": "outposts",
+    "name": "AWS Outposts",
+    "docs_url": "https://docs.aws.amazon.com/outposts/",
+    "aliases": [
+      "outposts"
+    ]
+  },
+  {
+    "id": "parallelcluster",
+    "name": "AWS ParallelCluster",
+    "docs_url": "https://docs.aws.amazon.com/parallelcluster/",
+    "aliases": [
+      "parallelcluster"
+    ]
+  },
+  {
+    "id": "pcs",
+    "name": "AWS Parallel Computing Service",
+    "docs_url": "https://docs.aws.amazon.com/pcs/",
+    "aliases": []
+  },
+  {
+    "id": "ecr",
+    "name": "Amazon Elastic Container Registry",
+    "docs_url": "https://docs.aws.amazon.com/ecr/",
+    "aliases": [
+      "ecr"
+    ]
+  },
+  {
+    "id": "ecs",
+    "name": "Amazon Elastic Container Service",
+    "docs_url": "https://docs.aws.amazon.com/ecs/",
+    "aliases": [
+      "ecs"
+    ]
+  },
+  {
+    "id": "eks",
+    "name": "Amazon Elastic Kubernetes Service",
+    "docs_url": "https://docs.aws.amazon.com/eks/",
+    "aliases": [
+      "eks"
+    ]
+  },
+  {
+    "id": "autoscaling",
+    "name": "Amazon EC2 Auto Scaling",
+    "docs_url": "https://docs.aws.amazon.com/autoscaling/",
+    "aliases": [
+      "autoscaling"
+    ]
+  },
+  {
+    "id": "s3",
+    "name": "Amazon Simple Storage Service",
+    "docs_url": "https://docs.aws.amazon.com/s3/",
+    "aliases": [
+      "s3"
+    ]
+  },
+  {
+    "id": "ebs",
+    "name": "Amazon Elastic Block Store",
+    "docs_url": "https://docs.aws.amazon.com/ebs/",
+    "aliases": [
+      "ebs"
+    ]
+  },
+  {
+    "id": "efs",
+    "name": "Amazon Elastic File System",
+    "docs_url": "https://docs.aws.amazon.com/efs/",
+    "aliases": [
+      "efs"
+    ]
+  },
+  {
+    "id": "fsx",
+    "name": "Amazon FSx",
+    "docs_url": "https://docs.aws.amazon.com/fsx/",
+    "aliases": [
+      "fsx"
+    ]
+  },
+  {
+    "id": "aws-backup",
+    "name": "AWS Backup",
+    "docs_url": "https://docs.aws.amazon.com/aws-backup/",
+    "aliases": [
+      "aws backup"
+    ]
+  },
+  {
+    "id": "storagegateway",
+    "name": "AWS Storage Gateway",
+    "docs_url": "https://docs.aws.amazon.com/storagegateway/",
+    "aliases": [
+      "storagegateway"
+    ]
+  },
+  {
+    "id": "datasync",
+    "name": "AWS DataSync",
+    "docs_url": "https://docs.aws.amazon.com/datasync/",
+    "aliases": [
+      "datasync"
+    ]
+  },
+  {
+    "id": "transfer",
+    "name": "AWS Transfer Family",
+    "docs_url": "https://docs.aws.amazon.com/transfer/",
+    "aliases": []
+  },
+  {
+    "id": "drs",
+    "name": "AWS Elastic Disaster Recovery",
+    "docs_url": "https://docs.aws.amazon.com/drs/",
+    "aliases": []
+  },
+  {
+    "id": "rds",
+    "name": "Amazon Relational Database Service",
+    "docs_url": "https://docs.aws.amazon.com/rds/",
+    "aliases": [
+      "rds"
+    ]
+  },
+  {
+    "id": "dynamodb",
+    "name": "Amazon DynamoDB",
+    "docs_url": "https://docs.aws.amazon.com/dynamodb/",
+    "aliases": [
+      "dynamodb"
+    ]
+  },
+  {
+    "id": "documentdb",
+    "name": "Amazon DocumentDB (with MongoDB compatibility)",
+    "docs_url": "https://docs.aws.amazon.com/documentdb/",
+    "aliases": [
+      "documentdb"
+    ]
+  },
+  {
+    "id": "elasticache",
+    "name": "Amazon ElastiCache",
+    "docs_url": "https://docs.aws.amazon.com/elasticache/",
+    "aliases": [
+      "elasticache"
+    ]
+  },
+  {
+    "id": "keyspaces",
+    "name": "Amazon Keyspaces (for Apache Cassandra)",
+    "docs_url": "https://docs.aws.amazon.com/keyspaces/",
+    "aliases": [
+      "keyspaces"
+    ]
+  },
+  {
+    "id": "memorydb",
+    "name": "Amazon MemoryDB",
+    "docs_url": "https://docs.aws.amazon.com/memorydb/",
+    "aliases": [
+      "memorydb"
+    ]
+  },
+  {
+    "id": "neptune",
+    "name": "Amazon Neptune",
+    "docs_url": "https://docs.aws.amazon.com/neptune/",
+    "aliases": [
+      "neptune"
+    ]
+  },
+  {
+    "id": "timestream",
+    "name": "Amazon Timestream",
+    "docs_url": "https://docs.aws.amazon.com/timestream/",
+    "aliases": [
+      "timestream"
+    ]
+  },
+  {
+    "id": "vpc",
+    "name": "Amazon Virtual Private Cloud",
+    "docs_url": "https://docs.aws.amazon.com/vpc/",
+    "aliases": [
+      "vpc"
+    ]
+  },
+  {
+    "id": "apigateway",
+    "name": "Amazon API Gateway",
+    "docs_url": "https://docs.aws.amazon.com/apigateway/",
+    "aliases": [
+      "apigateway"
+    ]
+  },
+  {
+    "id": "cloudfront",
+    "name": "Amazon CloudFront",
+    "docs_url": "https://docs.aws.amazon.com/cloudfront/",
+    "aliases": [
+      "cloudfront"
+    ]
+  },
+  {
+    "id": "route53",
+    "name": "Amazon Route 53",
+    "docs_url": "https://docs.aws.amazon.com/route53/",
+    "aliases": [
+      "route53"
+    ]
+  },
+  {
+    "id": "directconnect",
+    "name": "AWS Direct Connect",
+    "docs_url": "https://docs.aws.amazon.com/directconnect/",
+    "aliases": [
+      "directconnect"
+    ]
+  },
+  {
+    "id": "global-accelerator",
+    "name": "AWS Global Accelerator",
+    "docs_url": "https://docs.aws.amazon.com/global-accelerator/",
+    "aliases": [
+      "global accelerator"
+    ]
+  },
+  {
+    "id": "vpn",
+    "name": "AWS Virtual Private Network",
+    "docs_url": "https://docs.aws.amazon.com/vpn/",
+    "aliases": [
+      "vpn"
+    ]
+  },
+  {
+    "id": "cloud-map",
+    "name": "AWS Cloud Map",
+    "docs_url": "https://docs.aws.amazon.com/cloud-map/",
+    "aliases": [
+      "cloud map"
+    ]
+  },
+  {
+    "id": "verified-access",
+    "name": "AWS Verified Access",
+    "docs_url": "https://docs.aws.amazon.com/verified-access/",
+    "aliases": [
+      "verified access"
+    ]
+  },
+  {
+    "id": "vpc-lattice",
+    "name": "Amazon VPC Lattice",
+    "docs_url": "https://docs.aws.amazon.com/vpc-lattice/",
+    "aliases": [
+      "vpc lattice"
+    ]
+  },
+  {
+    "id": "iam",
+    "name": "AWS Identity and Access Management",
+    "docs_url": "https://docs.aws.amazon.com/iam/",
+    "aliases": [
+      "iam"
+    ]
+  },
+  {
+    "id": "singlesignon",
+    "name": "AWS IAM Identity Center",
+    "docs_url": "https://docs.aws.amazon.com/singlesignon/",
+    "aliases": [
+      "singlesignon"
+    ]
+  },
+  {
+    "id": "acm",
+    "name": "AWS Certificate Manager",
+    "docs_url": "https://docs.aws.amazon.com/acm/",
+    "aliases": [
+      "acm"
+    ]
+  },
+  {
+    "id": "privateca",
+    "name": "AWS Private Certificate Authority",
+    "docs_url": "https://docs.aws.amazon.com/privateca/",
+    "aliases": [
+      "privateca"
+    ]
+  },
+  {
+    "id": "kms",
+    "name": "AWS Key Management Service",
+    "docs_url": "https://docs.aws.amazon.com/kms/",
+    "aliases": [
+      "kms"
+    ]
+  },
+  {
+    "id": "secretsmanager",
+    "name": "AWS Secrets Manager",
+    "docs_url": "https://docs.aws.amazon.com/secretsmanager/",
+    "aliases": [
+      "secretsmanager"
+    ]
+  },
+  {
+    "id": "cloudhsm",
+    "name": "AWS CloudHSM",
+    "docs_url": "https://docs.aws.amazon.com/cloudhsm/",
+    "aliases": [
+      "cloudhsm"
+    ]
+  },
+  {
+    "id": "signer",
+    "name": "AWS Signer",
+    "docs_url": "https://docs.aws.amazon.com/signer/",
+    "aliases": []
+  },
+  {
+    "id": "cognito",
+    "name": "Amazon Cognito",
+    "docs_url": "https://docs.aws.amazon.com/cognito/",
+    "aliases": [
+      "cognito"
+    ]
+  },
+  {
+    "id": "guardduty",
+    "name": "Amazon GuardDuty",
+    "docs_url": "https://docs.aws.amazon.com/guardduty/",
+    "aliases": [
+      "guardduty"
+    ]
+  },
+  {
+    "id": "inspector",
+    "name": "Amazon Inspector",
+    "docs_url": "https://docs.aws.amazon.com/inspector/",
+    "aliases": []
+  },
+  {
+    "id": "macie",
+    "name": "Amazon Macie",
+    "docs_url": "https://docs.aws.amazon.com/macie/",
+    "aliases": [
+      "macie"
+    ]
+  },
+  {
+    "id": "detective",
+    "name": "Amazon Detective",
+    "docs_url": "https://docs.aws.amazon.com/detective/",
+    "aliases": []
+  },
+  {
+    "id": "network-firewall",
+    "name": "AWS Network Firewall",
+    "docs_url": "https://docs.aws.amazon.com/network-firewall/",
+    "aliases": [
+      "network firewall"
+    ]
+  },
+  {
+    "id": "firewall-manager",
+    "name": "AWS Firewall Manager",
+    "docs_url": "https://docs.aws.amazon.com/firewall-manager/",
+    "aliases": [
+      "firewall manager"
+    ]
+  },
+  {
+    "id": "shield",
+    "name": "AWS Shield",
+    "docs_url": "https://docs.aws.amazon.com/shield/",
+    "aliases": []
+  },
+  {
+    "id": "waf",
+    "name": "AWS WAF",
+    "docs_url": "https://docs.aws.amazon.com/waf/",
+    "aliases": [
+      "waf"
+    ]
+  },
+  {
+    "id": "security-lake",
+    "name": "Amazon Security Lake",
+    "docs_url": "https://docs.aws.amazon.com/security-lake/",
+    "aliases": [
+      "security lake"
+    ]
+  },
+  {
+    "id": "verifiedpermissions",
+    "name": "Amazon Verified Permissions",
+    "docs_url": "https://docs.aws.amazon.com/verifiedpermissions/",
+    "aliases": [
+      "verifiedpermissions"
+    ]
+  },
+  {
+    "id": "audit-manager",
+    "name": "AWS Audit Manager",
+    "docs_url": "https://docs.aws.amazon.com/audit-manager/",
+    "aliases": [
+      "audit manager"
+    ]
+  },
+  {
+    "id": "directory-service",
+    "name": "AWS Directory Service",
+    "docs_url": "https://docs.aws.amazon.com/directory-service/",
+    "aliases": [
+      "directory service"
+    ]
+  },
+  {
+    "id": "cloudwatch",
+    "name": "Amazon CloudWatch",
+    "docs_url": "https://docs.aws.amazon.com/cloudwatch/",
+    "aliases": [
+      "cloudwatch"
+    ]
+  },
+  {
+    "id": "cloudtrail",
+    "name": "AWS CloudTrail",
+    "docs_url": "https://docs.aws.amazon.com/cloudtrail/",
+    "aliases": [
+      "cloudtrail"
+    ]
+  },
+  {
+    "id": "cloudformation",
+    "name": "AWS CloudFormation",
+    "docs_url": "https://docs.aws.amazon.com/cloudformation/",
+    "aliases": [
+      "cloudformation"
+    ]
+  },
+  {
+    "id": "config",
+    "name": "AWS Config",
+    "docs_url": "https://docs.aws.amazon.com/config/",
+    "aliases": []
+  },
+  {
+    "id": "systems-manager",
+    "name": "AWS Systems Manager",
+    "docs_url": "https://docs.aws.amazon.com/systems-manager/",
+    "aliases": [
+      "systems manager"
+    ]
+  },
+  {
+    "id": "organizations",
+    "name": "AWS Account Management",
+    "docs_url": "https://docs.aws.amazon.com/organizations/",
+    "aliases": []
+  },
+  {
+    "id": "controltower",
+    "name": "AWS Control Tower",
+    "docs_url": "https://docs.aws.amazon.com/controltower/",
+    "aliases": [
+      "controltower"
+    ]
+  },
+  {
+    "id": "health",
+    "name": "AWS Health",
+    "docs_url": "https://docs.aws.amazon.com/health/",
+    "aliases": []
+  },
+  {
+    "id": "compute-optimizer",
+    "name": "AWS Compute Optimizer",
+    "docs_url": "https://docs.aws.amazon.com/compute-optimizer/",
+    "aliases": [
+      "compute optimizer"
+    ]
+  },
+  {
+    "id": "servicecatalog",
+    "name": "AWS Service Catalog",
+    "docs_url": "https://docs.aws.amazon.com/servicecatalog/",
+    "aliases": [
+      "servicecatalog"
+    ]
+  },
+  {
+    "id": "appconfig",
+    "name": "AWS AppConfig",
+    "docs_url": "https://docs.aws.amazon.com/appconfig/",
+    "aliases": [
+      "appconfig"
+    ]
+  },
+  {
+    "id": "resilience-hub",
+    "name": "AWS Resilience Hub",
+    "docs_url": "https://docs.aws.amazon.com/resilience-hub/",
+    "aliases": [
+      "resilience hub"
+    ]
+  },
+  {
+    "id": "grafana",
+    "name": "Amazon Managed Grafana",
+    "docs_url": "https://docs.aws.amazon.com/grafana/",
+    "aliases": [
+      "grafana"
+    ]
+  },
+  {
+    "id": "prometheus",
+    "name": "Amazon Managed Service for Prometheus",
+    "docs_url": "https://docs.aws.amazon.com/prometheus/",
+    "aliases": [
+      "prometheus"
+    ]
+  },
+  {
+    "id": "athena",
+    "name": "Amazon Athena",
+    "docs_url": "https://docs.aws.amazon.com/athena/",
+    "aliases": [
+      "athena"
+    ]
+  },
+  {
+    "id": "emr",
+    "name": "Amazon EMR",
+    "docs_url": "https://docs.aws.amazon.com/emr/",
+    "aliases": [
+      "emr"
+    ]
+  },
+  {
+    "id": "glue",
+    "name": "AWS Glue",
+    "docs_url": "https://docs.aws.amazon.com/glue/",
+    "aliases": [
+      "glue"
+    ]
+  },
+  {
+    "id": "lake-formation",
+    "name": "AWS Lake Formation",
+    "docs_url": "https://docs.aws.amazon.com/lake-formation/",
+    "aliases": [
+      "lake formation"
+    ]
+  },
+  {
+    "id": "firehose",
+    "name": "Amazon Data Firehose",
+    "docs_url": "https://docs.aws.amazon.com/firehose/",
+    "aliases": [
+      "firehose"
+    ]
+  },
+  {
+    "id": "kinesis",
+    "name": "Amazon Kinesis",
+    "docs_url": "https://docs.aws.amazon.com/kinesis/",
+    "aliases": [
+      "kinesis"
+    ]
+  },
+  {
+    "id": "managed-flink",
+    "name": "Amazon Managed Service for Apache Flink",
+    "docs_url": "https://docs.aws.amazon.com/managed-flink/",
+    "aliases": [
+      "managed flink"
+    ]
+  },
+  {
+    "id": "msk",
+    "name": "Amazon Managed Streaming for Apache Kafka",
+    "docs_url": "https://docs.aws.amazon.com/msk/",
+    "aliases": [
+      "msk"
+    ]
+  },
+  {
+    "id": "opensearch-service",
+    "name": "Amazon OpenSearch Service",
+    "docs_url": "https://docs.aws.amazon.com/opensearch-service/",
+    "aliases": [
+      "opensearch service"
+    ]
+  },
+  {
+    "id": "redshift",
+    "name": "Amazon Redshift",
+    "docs_url": "https://docs.aws.amazon.com/redshift/",
+    "aliases": [
+      "redshift"
+    ]
+  },
+  {
+    "id": "datazone",
+    "name": "Amazon DataZone",
+    "docs_url": "https://docs.aws.amazon.com/datazone/",
+    "aliases": [
+      "datazone"
+    ]
+  },
+  {
+    "id": "eventbridge",
+    "name": "Amazon EventBridge",
+    "docs_url": "https://docs.aws.amazon.com/eventbridge/",
+    "aliases": [
+      "eventbridge"
+    ]
+  },
+  {
+    "id": "sns",
+    "name": "Amazon Simple Notification Service",
+    "docs_url": "https://docs.aws.amazon.com/sns/",
+    "aliases": [
+      "sns"
+    ]
+  },
+  {
+    "id": "sqs",
+    "name": "Amazon Simple Queue Service",
+    "docs_url": "https://docs.aws.amazon.com/sqs/",
+    "aliases": [
+      "sqs"
+    ]
+  },
+  {
+    "id": "step-functions",
+    "name": "AWS Step Functions",
+    "docs_url": "https://docs.aws.amazon.com/step-functions/",
+    "aliases": [
+      "step functions"
+    ]
+  },
+  {
+    "id": "amazon-mq",
+    "name": "Amazon MQ",
+    "docs_url": "https://docs.aws.amazon.com/amazon-mq/",
+    "aliases": [
+      "amazon mq"
+    ]
+  },
+  {
+    "id": "mwaa",
+    "name": "Amazon MWAA",
+    "docs_url": "https://docs.aws.amazon.com/mwaa/",
+    "aliases": [
+      "mwaa"
+    ]
+  },
+  {
+    "id": "appflow",
+    "name": "Amazon AppFlow",
+    "docs_url": "https://docs.aws.amazon.com/appflow/",
+    "aliases": [
+      "appflow"
+    ]
+  },
+  {
+    "id": "appsync",
+    "name": "AWS AppSync",
+    "docs_url": "https://docs.aws.amazon.com/appsync/",
+    "aliases": [
+      "appsync"
+    ]
+  },
+  {
+    "id": "codebuild",
+    "name": "AWS CodeBuild",
+    "docs_url": "https://docs.aws.amazon.com/codebuild/",
+    "aliases": [
+      "codebuild"
+    ]
+  },
+  {
+    "id": "codedeploy",
+    "name": "AWS CodeDeploy",
+    "docs_url": "https://docs.aws.amazon.com/codedeploy/",
+    "aliases": [
+      "codedeploy"
+    ]
+  },
+  {
+    "id": "codepipeline",
+    "name": "AWS CodePipeline",
+    "docs_url": "https://docs.aws.amazon.com/codepipeline/",
+    "aliases": [
+      "codepipeline"
+    ]
+  },
+  {
+    "id": "codeartifact",
+    "name": "AWS CodeArtifact",
+    "docs_url": "https://docs.aws.amazon.com/codeartifact/",
+    "aliases": [
+      "codeartifact"
+    ]
+  },
+  {
+    "id": "bedrock",
+    "name": "Amazon Bedrock",
+    "docs_url": "https://docs.aws.amazon.com/bedrock/",
+    "aliases": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "sagemaker",
+    "name": "Amazon SageMaker AI",
+    "docs_url": "https://docs.aws.amazon.com/sagemaker/",
+    "aliases": [
+      "sagemaker"
+    ]
+  }
+]

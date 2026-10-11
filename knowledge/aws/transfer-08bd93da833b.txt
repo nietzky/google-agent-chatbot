@@ -1,0 +1,25 @@
+AWS Transfer Family
+Troubleshooting AWS Transfer Family
+This chapter provides troubleshooting information for common issues you might encounter
+        when using AWS Transfer Family. Each section focuses on a specific area of functionality to help you
+        quickly find solutions to your problems.
+For issues with IAM in Transfer Family, see
+Troubleshooting AWS Transfer Family identity and access
+.
+For issues with your Transfer Family web apps, see
+Troubleshooting your web apps
+.
+Topics
+Troubleshoot authentication issues
+Troubleshoot SFTP connector issues
+Troubleshoot SFTP connectivity and transfer issues
+Troubleshoot custom identity provider issues
+Troubleshoot workflow issues
+Troubleshoot EFS issues
+Troubleshoot storage and encryption issues
+Troubleshoot monitoring and alerting issues
+Troubleshoot cross-region transfer issues
+Troubleshoot Terraform deployment issues
+Troubleshoot Web Application Firewall integration issues
+Troubleshoot service-managed user issues
+Troubleshoot AS2 issues

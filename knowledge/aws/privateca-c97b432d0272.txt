@@ -1,0 +1,7 @@
+AWS Private Certificate Authority
+Troubleshoot issues with AWS Private Certificate Authority
+Consult the following topics if you have problems using AWS Private Certificate Authority.
+Topics
+Certificate revocation issues
+Exception messages
+Matter-compliant certificate errors

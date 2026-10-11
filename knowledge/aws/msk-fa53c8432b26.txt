@@ -1,0 +1,13 @@
+Amazon Managed Streaming for Apache Kafka
+Troubleshooting
+Topics
+Channel stuck in CREATING state
+Checking operation status
+Data freshness higher than configured
+Throughput exceeds the supported limit
+Failed records (FailedRowCount greater than 0)
+No data appearing in the table
+Channel is suspended
+Delivery stops after a schema change
+Permission denied errors in Amazon CloudWatch Logs
+Channel not available on cluster

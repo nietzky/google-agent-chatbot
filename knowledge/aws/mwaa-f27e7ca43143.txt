@@ -1,0 +1,51 @@
+Amazon MWAA
+Troubleshooting Amazon Managed Workflows for Apache Airflow
+This chapter describes common issues and errors you can encounter when using Apache Airflow on Amazon Managed Workflows for Apache Airflow and recommended steps to resolve these errors.
+Contents
+Troubleshooting: DAGs, Operators, Connections, and other issues
+Connections
+I can't connect to Secrets Manager
+How do I configure secretsmanager:ResourceTag/<tag-key> secrets manager conditions or a resource restriction in my execution role policy?
+I can't connect to Snowflake
+I can't find my connection in the Airflow UI
+Webserver
+I get a 5xx error accessing the webserver
+I get a The scheduler does not seem to be running error
+Tasks
+I get my tasks stuck or not completing
+I get task failures without logs in Airflow v3
+CLI
+I get a '503' error when triggering a DAG in the CLI
+Why does the dags backfill Apache Airflow CLI command fail? Is there a workaround?
+Operators
+I received a PermissionError: [Errno 13] Permission denied error using the S3Transform operator
+Troubleshooting: Creating and updating an Amazon MWAA environment
+Updating requirements.txt
+I specified a new version of my requirements.txt and it's taking more than 20 minutes to update my environment
+I get a Could not install packages due to an OSError [Error 28] No space left on device error
+Plugins
+Does Amazon MWAA support implementing custom UI?
+Create bucket
+I can't select the option for S3 Block Public Access settings
+Create environment
+I tried to create an environment and it's stuck in the Creating state
+I tried to create an environment but it displays the status as Create failed
+I tried to select a VPC and received a Network Failure error
+I tried to create an environment and received a service, partition, or resource "must be passed" error
+I tried to create an environment and it displays the status as Available but when I try to access the Airflow UI an Empty Reply from Server or 502 Bad Gateway error is shown
+I tried to create an environment and my user name is a bunch of random character names
+Update environment
+I tried changing the environment class but the update failed
+Access environment
+I can't access the Apache Airflow UI
+Troubleshooting: CloudWatch Logs and CloudTrail errors
+Logs
+I can't find my task logs, or I received a Reading remote log from Cloudwatch log_group error
+Tasks are failing without any logs
+I get a ResourceAlreadyExistsException error in CloudTrail
+I get an Invalid request error in CloudTrail
+I get Cannot locate a 64-bit Oracle Client library: "libclntsh.so: cannot open shared object file: No such file or directory in Apache Airflow logs
+I get psycopg2 'server closed the connection unexpectedly' in my scheduler logs
+I get Executor reports task instance %s finished (%s) although the task says its %s in my DAG processing logs
+Triggerer logs do not appear in the Airflow UI
+I get Could not read remote logs from log_group: airflow-*{*environmentName}-Task log_stream:* {*DAG_ID}/*{*TASK_ID}/*{*time}/*{*n}.log. in my task logs

@@ -1,0 +1,11 @@
+AWS Direct Connect
+Troubleshoot Direct Connect
+The following troubleshooting information can help you diagnose and fix issues with your 
+	    Direct Connect connection.
+Contents
+Layer 1 (physical) issues
+Layer 2 (data link) issues
+Layer 3/4 (Network/Transport) issues
+BGP TTL security (GTSM)
+Long ASN issues
+Routing issues

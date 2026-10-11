@@ -1,0 +1,335 @@
+AWS Step Functions
+Troubleshooting issues in Step Functions
+If you encounter difficulties when working with Step Functions, use the following troubleshooting
+      resources.
+The following topics provide troubleshooting advice for errors and issues that you might encounter related to Step Functions state machines, service integrations, activities, and workflows. If you find an issue that is not listed here, you can use the
+Feedback
+button on this page to report it.
+For more troubleshooting advice and answers to common support questions, visit the
+AWS Knowledge Center
+.
+Topics
+General issues
+Service integrations
+Activities
+Express workflows
+Distributed Maps
+General troubleshooting
+I'm unable to create a state machine.
+The IAM role associated with the state machine might not have
+sufficient permissions
+. Check the IAM role's permissions, including for AWS service
+            integration tasks, X-Ray, and CloudWatch logging. Additional permissions are required for
+.sync
+task states.
+I'm unable to use a JsonPath to reference the previous task’s output.
+For a JsonPath, a JSON key must end with
+.$
+. This means a JsonPath can
+            only be used in a key-value pair. If you want to use a JsonPath other places, such as an
+            array, you can use
+intrinsic
+                functions
+. For example, you could use something similar to the
+            following:
+Task A output:
+{
+"sample": "test"
+}
+Task B:
+{
+"JsonPathSample.$": "$.sample"
+}
+There was a delay in state transitions.
+For standard workflows, there is a limit on the number of state transitions. When you
+            exceed the state transition limit, Step Functions delays state transitions until the bucket for
+            the quota is filled. State transition limit throttling can be monitored by reviewing the
+ExecutionThrottled
+metric in the
+Execution Metrics
+section of
+            the CloudWatch Metrics page.
+When I start new Standard Workflow executions, they fail with the
+ExecutionLimitExceeded
+error.
+Step Functions has a limit of 1,000,000 open executions for each AWS account in each AWS Region. If you exceed
+            this limit, Step Functions throws an
+ExecutionLimitExceeded
+error. This limit does
+            not apply to Express Workflows. You can use the
+OpenExecutionCount
+to track when you are approaching the
+OpenExecutionLimit
+and create alarms to proactively notify you in that event.
+OpenExecutionCount
+is an approximate number of open workflows.
+            For more information, see
+Execution Metrics
+.
+A failure on one branch in a parallel state causes the whole execution to fail.
+This is an expected behavior. To avoid encountering failures when using a parallel
+            state, configure Step Functions to
+catch errors
+thrown from each
+            branch.
+Troubleshooting service integrations
+My job is complete in the downstream service, but in Step Functions the task state remains "In progress" or its completion is delayed.
+For
+.sync
+service integration patterns, Step Functions uses EventBridge rules, downstream
+            APIs, or a combination of both to detect the downstream job status. For some services,
+            Step Functions does not create EventBridge rules to monitor. For example, for the AWS Glue service
+            integration, instead of using EventBridge rules, Step Functions makes a
+glue:GetJobRun
+call. Because of the frequency of API calls, there is a difference between the
+            downstream task completion and the Step Functions task completion time. Step Functions requires IAM
+            permissions to manage the EventBridge rules and to make calls to the downstream service. For
+            more details about how insufficient permissions on your execution role can affect the
+            completion of tasks, see
+Additional permissions for tasks using .sync
+.
+I want to return a JSON output from a nested state machine execution.
+There are two Step Functions synchronous service integrations for Step Functions:
+startExecution.sync
+and
+startExecution.sync:2
+. Both wait
+            for the nested state machine to complete, but they return different
+Output
+formats. You can use
+startExecution.sync:2
+to return a JSON output under
+Output
+.
+I can't invoke a Lambda function from another account.
+Accessing the Lambda function with cross-account support
+If
+cross-account access
+of AWS resources is available in your Region, use the following method to invoke a Lambda function from another account.
+To invoke a cross-account resource in your workflows, do the following:
+Create an IAM role
+            in the target account that contains the resource. This role grants the source account,
+            containing the state machine, permissions to access the target account's resources.
+In the
+Task
+state's definition, specify the target IAM role to be assumed by the state machine before invoking the
+            cross-account resource.
+Modify the trust policy in the target IAM role to allow the source account to assume this role
+            temporarily. The trust policy must include the Amazon Resource Name (ARN) of the
+            state machine defined in the source account. Also, define the appropriate
+            permissions in the target IAM role to call the AWS resource.
+Update the source account’s
+            execution role to include the required permission for assuming the target IAM role.
+For an
+        example, see
+Accessing cross-account AWS resources in Step Functions
+in the tutorials.
+Note
+You can configure your state machine to assume an IAM role for accessing
+            resources from multiple AWS accounts. However, a state machine can assume only one
+            IAM role at a given time.
+For an example of a
+Task
+state definition that specifies a cross-account resource, see
+Task state's Credentials field examples
+.
+Accessing the Lambda function without cross-account support
+If cross-account access of AWS resources is unavailable in your Region, use the following method to invoke a Lambda function from another account.
+In the
+Task
+state’s
+Resource
+field, use
+arn:aws:states:::lambda:invoke
+and pass the
+FunctionArn
+in
+            parameters. The IAM role that is associated with the state machine must have the right
+            permissions to invoke cross-account Lambda functions:
+lambda:invokeFunction
+.
+{
+"StartAt":"CallLambda",
+   "States":
+{
+"CallLambda":
+{
+"Type":"Task",
+         "Resource":"arn:aws:states:::lambda:invoke",
+         "Parameters":
+{
+"FunctionName":"arn:aws:lambda:
+region
+:
+account-id
+:function:my-function"
+         },
+         "End":true
+      }
+   }
+}
+I'm unable to see task tokens passed from
+.waitForTaskToken
+states.
+In the
+Task
+state’s
+Parameters
+field, you must pass a task
+            token. For example, you could use something similar to the following code.
+{
+"StartAt":"taskToken",
+   "States":
+{
+"taskToken":
+{
+"Type":"Task",
+         "Resource":"arn:aws:states:::lambda:invoke.waitForTaskToken",
+         "Parameters":
+{
+"FunctionName":"get-model-review-decision",
+            "Payload":
+{
+"token.$":"$$.Task.Token"
+            },
+         },
+         "End":true
+      }
+   }
+}
+Note
+You can try to use
+.waitForTaskToken
+with any API action. However,
+                some APIs don't have any suitable parameters.
+Troubleshooting activities
+My state machine execution is stuck at an activity state.
+An activity task state doesn't start until you poll a task token by using the
+GetActivityTask
+API action. As a best practice, add a task level timeout in
+            order to avoid a stuck execution. For more information, see
+Using timeouts to avoid stuck Step Functions workflow executions
+.
+If your state machine is stuck in the
+ActivityScheduled
+event, it indicates that your activity worker fleet has issues or is under-scaled. You should monitor the
+ActivityScheduleTime
+CloudWatch metric and set an alarm when that time increases. However, to time out any stuck state machine executions in which the
+Activity
+state doesn't transition to the
+ActivityStarted
+state, define a timeout at state machine-level. To do this, specify a
+TimeoutSeconds
+field at the beginning of the state machine definition, outside of the
+States
+field.
+My activity worker times out while waiting for a task token.
+Workers use the
+GetActivityTask
+API action to retrieve a task with the specified activity
+            ARN that is scheduled for execution by a running state machine.
+GetActivityTask
+starts a long poll, so the service holds the HTTP
+            connection open and responds as soon as a task becomes available. The maximum time the
+            service hold the request before responding is 60 seconds. If no task is available within
+            60 seconds, the poll returns a
+taskToken
+with a null string. To avoid this
+            timeout, configure a client side socket
+with a timeout of at least 65
+seconds in the AWS SDK or in the client you are using to make the API call.
+Troubleshooting express workflows
+My application times out before receiving a response from a
+StartSyncExecution
+API call.
+Configure a client side socket timeout in the AWS SDK or client
+            you
+            use to make the API call. To receive a response, the timeout must have
+            a value higher than the duration of
+            the
+            Express Workflow executions.
+I'm unable to see the execution history in order to troubleshoot Express Workflow failures.
+Express Workflows don't record execution history in AWS Step Functions. Instead, you must
+            turn
+            on CloudWatch logging.
+            After
+            logging is turned on, you can use CloudWatch Logs Insights queries to
+            review
+            your Express Workflow executions. You can also view execution history for Express
+            Workflow executions on the Step Functions console if you choose the
+Enable
+button in the
+Executions
+tab. For more information, see
+Viewing execution details in the Step Functions console
+.
+To list executions based on duration:
+fields ispresent(execution_arn) as exec_arn
+| filter exec_arn 
+| filter type in ["ExecutionStarted", "ExecutionSucceeded", "ExecutionFailed", "ExecutionAborted", "ExecutionTimedOut"]
+| stats latest(type) as status, 
+  tomillis(earliest(event_timestamp)) as UTC_starttime, 
+  tomillis(latest(event_timestamp)) as UTC_endtime, 
+  latest(event_timestamp) - earliest(event_timestamp) as duration_in_ms  by execution_arn
+| sort duration_in_ms desc
+To list failed and cancelled executions:
+fields ispresent(execution_arn) as isRes | filter type in ["ExecutionFailed", "ExecutionAborted", "ExecutionTimedOut"]
+Troubleshooting Distributed Maps
+My map run is stuck.
+There is a service quota for the
+maximum number of open map runs
+. Once this quota is exhausted,
+            additional map runs wait for more quota to become available as other map runs
+            complete. Backlogged map runs wait at the
+MapRunStarted
+event,
+            before reading their input, so you will see the map run's pending items
+            count remain at 0. Once a backlogged map run is able to acquire quota then
+            it will begin reading its input. You will then see the pending items count
+            increase and the map run will continue normally for the rest of its lifecycle. 
+            As quota becomes available, there is no particular order for how it is allocated
+            among the backlogged map runs.
+There is a risk of deadlock when using nested map runs. In this situation
+            you have a parent workflow execution containing a "parent" map run, which in
+            turn starts a child workflow execution containing a "child" map run, which
+            in turn starts a grandchild workflow execution. If no
+maximum
+            number of open map runs
+quota remains when the child workflow
+            execution starts its child map run then that child map run will be
+            backlogged. If the entire quota is being consumed by parent map runs, and
+            all the child map runs are backlogged, then neither group will be able to
+            make progress and they will remain deadlocked until quota becomes available
+            again. A map run will abort and make its quota available again when its
+            parent execution terminates, such as by timing out, failing due to an
+            uncaught error, or due to a
+StopExecution
+API call.
+When considering using nested map runs in your workflow design, estimate
+            if your expected number of open map runs could exceed the
+maximum number of open map runs
+quota and put you at
+            risk of delays or deadlock. If so, you can consider alternative designs.
+            For example, instead of using a parent map run to iterate over a list of
+            Amazon S3 objects and a child map run to read their contents, you could instead
+            use the
+LOAD_AND_FLATTEN
+transformation
+in your map run's
+ReaderConfig
+to perform both of those operations in a single
+            map run. Another common pattern is to include a preprocessing step, such as
+            a Lambda function, which iterates over your nested data and produces a file
+            that can be used as the map run's input.
+You can
+monitor your usage
+of the
+maximum number of open map
+            runs
+quota using the
+ApproximateOpenMapRunCount
+,
+OpenMapRunLimit
+, and
+ApproximateMapRunBacklogSize
+metrics in CloudWatch.

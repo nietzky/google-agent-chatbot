@@ -1,0 +1,14 @@
+AWS Parallel Computing Service
+Troubleshooting problems in AWS Parallel Computing Service
+The following topics provide guidance to troubleshoot some problems you
+  might encounter in AWS PCS.
+Cluster updates
+Cluster version updates
+Compute node bootstrap problems
+Custom Slurm settings
+EC2 instances terminated after reboot
+Identity and access
+Invalid node registration (INVALID_REG)
+Job submission MaxJobCount limit
+Missing accounting records
+Slurm reboot issues

@@ -1,0 +1,9 @@
+Amazon GuardDuty
+Troubleshooting Amazon GuardDuty
+When you receive issues related to performing an action specific to GuardDuty, consult the topics
+  in this section.
+Topics
+Exporting findings to Amazon S3 - access error
+Malware Protection for EC2 issues
+Runtime Monitoring issues
+Other troubleshooting issues

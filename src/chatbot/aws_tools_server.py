@@ -13,7 +13,7 @@ from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("pingo-aws-diagnostics")
+mcp = FastMCP("cloud-help-aws-diagnostics")
 
 
 # Report whether local AWS diagnostics are enabled, the configured region, and supported

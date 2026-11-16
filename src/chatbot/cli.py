@@ -109,7 +109,7 @@ async def run(args):
 # Define CLI subcommands and arguments, parse the process arguments, and enter the asynchronous
 # command dispatcher with asyncio.run.
 def main():
-    parser = argparse.ArgumentParser(description="Pingo IT support with Google ADK")
+    parser = argparse.ArgumentParser(description="Cloud Help IT support with Google ADK")
     sub = parser.add_subparsers(dest="command", required=True)
     chat_parser = sub.add_parser("chat")
     chat_parser.add_argument("--user", default="local-user")

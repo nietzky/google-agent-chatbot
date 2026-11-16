@@ -15,10 +15,10 @@ from chatbot.products import current_turn
 logger = logging.getLogger(__name__)
 
 
-class PingoMemoryService(BaseMemoryService):
+class CloudHelpMemoryService(BaseMemoryService):
     """Persist selected facts across ADK sessions; never index raw conversation transcripts."""
 
-    def __init__(self, store, app_name, es=None, index="pingo-memory-v1"):
+    def __init__(self, store, app_name, es=None, index="cloudhelp-memory-v1"):
         # Identity is supplied by ADK/server context. This service owns only its worker connection.
         """Configure the adapter without opening connections or starting background tasks.
 
@@ -76,7 +76,7 @@ class PingoMemoryService(BaseMemoryService):
         """
         if self.es is not None:
             self.worker_store = await MemoryStore.open(path)
-            self.task = asyncio.create_task(self.run(), name="pingo-memory-search-sync")
+            self.task = asyncio.create_task(self.run(), name="cloud-help-memory-search-sync")
 
     async def close(self):
         # Stop pending network work before closing our connection; callers own Elasticsearch.

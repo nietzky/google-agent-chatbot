@@ -37,4 +37,4 @@ class Turn:
     assistance: list[dict] = field(default_factory=list)
 
 
-current_turn: ContextVar[Turn | None] = ContextVar("pingo_turn", default=None)
+current_turn: ContextVar[Turn | None] = ContextVar("cloud_help_turn", default=None)

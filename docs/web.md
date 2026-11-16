@@ -1,4 +1,4 @@
-# Pingo web API and frontend
+# Cloud Help web API and frontend
 
 React/TypeScript is served by FastAPI at http://127.0.0.1:8000/. Build the frontend with
 `npm ci && npm run build` in `frontend/` (run as separate commands in PowerShell if needed).

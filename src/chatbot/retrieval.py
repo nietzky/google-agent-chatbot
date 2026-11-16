@@ -61,7 +61,10 @@ class KnowledgeStore:
         """Do not compare embeddings from different models, even at the same dimension."""
         if not self._index_verified:
             mapping = await self.es.indices.get_mapping(index=self.index)
-            if mapping[self.index]["mappings"].get("_meta") != self._embedding_metadata():
+            # Elasticsearch returns concrete names even when queried through an alias.
+            if len(mapping) != 1:
+                raise ValueError("Knowledge index must resolve to exactly one concrete index")
+            if next(iter(mapping.values()))["mappings"].get("_meta") != self._embedding_metadata():
                 raise ValueError("Embedding configuration differs; use a new index and re-ingest")
             self._index_verified = True
 

@@ -6,11 +6,12 @@ import logging
 import os
 import uuid
 from contextlib import asynccontextmanager
+from html import escape
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from google.adk.agents.run_config import RunConfig
 from google.adk.runners import Runner
@@ -21,6 +22,8 @@ from starlette.background import BackgroundTask
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from chatbot.agents import build_agents
+from chatbot.applications import INDEX as APPLICATION_INDEX
+from chatbot.applications import suggested_applications
 from chatbot.config import Settings
 from chatbot.learning import AutomaticMemory, learning_status
 from chatbot.products import Turn, current_turn, products
@@ -244,7 +247,7 @@ def create_app(service=None):
             finally:
                 await sessions.close()
 
-    app = FastAPI(title="Pingo Support API", version="0.4.0", lifespan=lifespan)
+    app = FastAPI(title="Cloud Help Support API", version="0.4.0", lifespan=lifespan)
     app.add_middleware(
         TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver"]
     )
@@ -337,6 +340,74 @@ def create_app(service=None):
         except Exception:
             return {"available": False, "products": []}
 
+    @app.get("/api/notifications")
+    async def notification_catalog(request: Request):
+        """List shared demo notifications newest first; no live account alerts are implied."""
+        try:
+            async with asyncio.timeout(5):
+                result = await chat(request).knowledge.es.search(
+                    index="cloudhelp-notifications-v1", size=1000,
+                    query={"match_all": {}}, sort=[{"created_at": "desc"}],
+                )
+            return {"notifications": [
+                {"id": hit["_id"], **hit["_source"]} for hit in result["hits"]["hits"]
+            ]}
+        except Exception:
+            raise HTTPException(503, "Notifications temporarily unavailable") from None
+
+    @app.get("/api/applications")
+    async def application_catalog(request: Request):
+        """Read the demo app catalog from Elasticsearch, independent of user interests."""
+        try:
+            async with asyncio.timeout(5):
+                result = await chat(request).knowledge.es.search(
+                    index=APPLICATION_INDEX, size=1000, query={"match_all": {}},
+                )
+            applications = [
+                {"id": hit["_id"], **hit["_source"],
+                 "url": f"/applications/{hit['_id']}"}
+                for hit in result["hits"]["hits"]
+            ]
+            return {"applications": sorted(applications, key=lambda app: app["name"].lower())}
+        except Exception:
+            raise HTTPException(503, "Application catalog temporarily unavailable") from None
+
+    @app.get("/api/applications/suggested")
+    async def application_suggestions(request: Request):
+        """Recommend demo applications using the configured user's active, quoted memories."""
+        service = chat(request)
+        try:
+            return await suggested_applications(service.knowledge.es, service.memory, service.user)
+        except Exception:
+            logger.warning("Application recommendations unavailable", exc_info=True)
+            return {"available": False, "applications": []}
+
+    @app.get("/applications/{application_id}", response_class=HTMLResponse)
+    async def application_detail(application_id: str, request: Request):
+        """Show an escaped catalog description, explicitly identifying the app as demo."""
+        try:
+            async with asyncio.timeout(5):
+                result = await chat(request).knowledge.es.search(
+                    index=APPLICATION_INDEX, size=1,
+                    query={"ids": {"values": [application_id]}},
+                )
+        except Exception:
+            raise HTTPException(503, "Application catalog unavailable") from None
+        hits = result["hits"]["hits"]
+        if not hits:
+            raise HTTPException(404, "Unknown application")
+        document = hits[0]["_source"]
+        return HTMLResponse(
+            '<!doctype html><html lang="en"><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<title>Cloud Help demo application</title><body style="font-family:Arial;'
+            'max-width:640px;margin:64px auto;padding:24px">'
+            '<a href="/">Back to Cloud Help</a><p>Demo application</p>'
+            f'<h1>{escape(document["name"])}</h1><p>{escape(document["description"])}</p>'
+            '<p>This is a catalog example, not an installed diagnostic tool. '
+            'It does not access your AWS account or fix resources.</p></body></html>'
+        )
+
     # Return the configured user's SQLite product interactions and incidents, optionally
     # filtered by product ID.
     @app.get("/api/product-history")
@@ -420,7 +491,7 @@ def create_app(service=None):
         return {
             "enabled": service.settings.auto_memory_enabled,
             "jobs": await learning_status(service.memory, service.user),
-            "memory_service": "PingoMemoryService (Google ADK)",
+            "memory_service": "CloudHelpMemoryService (Google ADK)",
             "search_index": service.settings.memory_index,
             "pending_index_updates": (
                 await (
@@ -449,6 +520,8 @@ def create_app(service=None):
 
     # Serve the built React entry page. Return HTTP 503 with build instructions when the
     # frontend distribution is missing.
+    @app.get("/notifications", include_in_schema=False)
+    @app.get("/app-center", include_in_schema=False)
     @app.get("/", include_in_schema=False)
     async def index():
         if not (dist / "index.html").exists():

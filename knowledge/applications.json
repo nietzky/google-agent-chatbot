@@ -1,0 +1,42 @@
+{
+  "s3": {
+    "name": "Bucket Beacon",
+    "description": "An assistant for Amazon S3 AccessDenied errors, bucket policies, and object access troubleshooting."
+  },
+  "ec2": {
+    "name": "Instance Inspector",
+    "description": "An assistant for Amazon EC2 connectivity, instance health, and security group troubleshooting."
+  },
+  "lambda": {
+    "name": "Function First Aid",
+    "description": "An assistant for AWS Lambda timeouts, permissions, and invocation failures."
+  },
+  "rds": {
+    "name": "Database Doctor",
+    "description": "An assistant for Amazon RDS connectivity, database availability, and performance issues."
+  },
+  "dynamodb": {
+    "name": "Table Triage",
+    "description": "An assistant for Amazon DynamoDB throttling, capacity, and query troubleshooting."
+  },
+  "eks": {
+    "name": "Cluster Compass",
+    "description": "An assistant for Amazon EKS pod scheduling, cluster access, and networking issues."
+  },
+  "ecs": {
+    "name": "Container Clinic",
+    "description": "An assistant for Amazon ECS task startup, service deployments, and container health issues."
+  },
+  "cloudwatch": {
+    "name": "Signal Scout",
+    "description": "An assistant for Amazon CloudWatch missing logs, alarm configuration, and metric troubleshooting."
+  },
+  "iam": {
+    "name": "Permission Pilot",
+    "description": "An assistant for AWS IAM policy evaluation, role trust, and denied permissions."
+  },
+  "vpc": {
+    "name": "Network Navigator",
+    "description": "An assistant for Amazon VPC routes, network ACLs, and connectivity troubleshooting."
+  }
+}

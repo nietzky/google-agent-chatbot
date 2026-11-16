@@ -1,13 +1,13 @@
-# Pingo ADK memory service: developer guide
+# Cloud Help ADK memory service: developer guide
 
 Implementation: [`src/chatbot/adk_memory.py`](../src/chatbot/adk_memory.py).
 Every method includes a detailed docstring describing its contract and limits.
 
 ## Purpose and ownership
 
-`PingoMemoryService` implements Google ADK's `BaseMemoryService`. It lets ADK save
+`CloudHelpMemoryService` implements Google ADK's `BaseMemoryService`. It lets ADK save
 explicit facts and recall useful information across conversations while retaining
-Pingo's existing evidence-based background extraction.
+Cloud Help's existing evidence-based background extraction.
 
 SQLite is authoritative. Elasticsearch is a replaceable, asynchronously updated
 search copy. The service does not train a model, store an entire transcript as a
@@ -23,7 +23,7 @@ configured OpenAI models; the search projection uses no model calls.
 | ADK `load_memory` | Lets the orchestrator request additional recall through the configured service. |
 | `AutomaticMemory` in `learning.py` | Extracts candidate facts, verifies evidence, consolidates corrections and sets expiration. |
 | `MemoryStore` in `memory.py` | Owns schema, authoritative writes, forgetting and transactionally queued indexing work. |
-| `PingoMemoryService.run` | Maintains the Elasticsearch projection from the durable outbox. |
+| `CloudHelpMemoryService.run` | Maintains the Elasticsearch projection from the durable outbox. |
 
 The caller owns the primary SQLite store and Elasticsearch client. The service
 owns its synchronization task and an additional SQLite connection to the same file.
@@ -141,7 +141,7 @@ not at a fixed wall-clock interval. While idle, that is roughly ten minutes; que
 work can make it faster and network delays can make it slower.
 
 An unavailable ES service can retain a stale physical document until synchronization
-recovers. It is excluded from Pingo recall, but direct ES administrators can still
+recovers. It is excluded from Cloud Help recall, but direct ES administrators can still
 see it until removed. Retired indexes are not maintained after changing `MEMORY_INDEX`.
 
 This is one application per SQLite database, with user and optional product filters.
@@ -156,7 +156,7 @@ confirmed outcomes are not automatically approved shared runbooks.
 - `/api/memories/status`: extraction job counts, ADK service name, active search index
   and the configured user's pending indexing count. Zero pending updates is not a
   full index-health check and does not promise that ES refresh has occurred.
-- `MEMORY_INDEX`: defaults to `pingo-memory-v1`; runtime rejects using the product index.
+- `MEMORY_INDEX`: defaults to `cloudhelp-memory-v1`; runtime rejects using the product index.
 - `Memory index sync deferred: <ExceptionType>`: indexing will retry; inspect ES availability
   and mappings without logging credentials or fact contents.
 - `Memory search unavailable; using authoritative SQLite recall`: recall used fallback.

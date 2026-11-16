@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowUp,
+  Bell,
   Check,
-  ChevronDown,
+  LayoutGrid,
   PanelLeftClose,
   PanelLeftOpen,
   MessageCircle,
+  MoreHorizontal,
   Plus,
   Search,
   Square,
   X,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import SuggestedApplications from "./SuggestedApplications";
 import ApplicationContext from "./ApplicationContext";
 import {
   api,
@@ -27,6 +30,7 @@ import {
  * Keep transient UI state here; the API owns persisted messages, product history, and memories.
  */
 export default function App() {
+  const [memoryRevision, setMemoryRevision] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [session, setSession] = useState<string | null>(null);
@@ -41,17 +45,17 @@ export default function App() {
   const [modal, setModal] = useState<"products" | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     try {
-      const saved = localStorage.getItem("pingo-sidebar-open");
-      return saved === null ? window.innerWidth > 760 : saved === "true";
+      const saved = localStorage.getItem("cloud-help-sidebar-open");
+      return saved === "true";
     } catch {
-      return window.innerWidth > 760;
+      return false;
     }
   });
   /** Persist the user's sidebar preference without making browser storage required. */
   function toggleSidebar() {
     setSidebarOpen((open) => {
       try {
-        localStorage.setItem("pingo-sidebar-open", String(!open));
+        localStorage.setItem("cloud-help-sidebar-open", String(!open));
       } catch {
         /* Storage may be disabled. */
       }
@@ -99,7 +103,12 @@ export default function App() {
   }, [modal]);
   // Keep the newest answer or progress update visible as the conversation grows.
   useEffect(() => {
-    void bottom.current?.scrollIntoView({ behavior: "smooth" });
+    const transcript = bottom.current?.closest("main");
+    const latest = transcript?.querySelector<HTMLElement>(".thinking") || transcript?.querySelector<HTMLElement>(".message:last-child");
+    if (transcript && latest) {
+      const end = latest.getBoundingClientRect().bottom - transcript.getBoundingClientRect().top + transcript.scrollTop;
+      transcript.scrollTo({ top: Math.max(0, end - transcript.clientHeight + 24), behavior: "smooth" });
+    }
   }, [messages, status]);
 
   /**
@@ -200,7 +209,7 @@ export default function App() {
 
   return (
     <div
-      className={`app ${sidebarOpen ? "sidebar-expanded" : "sidebar-collapsed"}`}
+      className={`app ${sidebarOpen ? "sidebar-expanded" : "sidebar-collapsed"} ${messages.length ? "has-messages" : "welcome-mode"}`}
     >
       <aside className="chat-sidebar" aria-label="Conversation sidebar">
         <button
@@ -219,7 +228,7 @@ export default function App() {
           ) : (
             <PanelLeftOpen size={20} />
           )}
-          {sidebarOpen && <span>Conversations</span>}
+          {sidebarOpen && <span>Cloud Help</span>}
         </button>
         <button
           className="sidebar-new"
@@ -230,7 +239,16 @@ export default function App() {
           <Plus size={19} />
           {sidebarOpen && <span>New conversation</span>}
         </button>
+        <a className="app-center-link" href="/app-center" aria-label="App Center" title="App Center">
+          <LayoutGrid size={20} />
+          {sidebarOpen && <span>App Center</span>}
+        </a>
+        <a className="app-center-link" href="/notifications" aria-label="Notifications" title="Notifications">
+          <Bell size={20} />
+          {sidebarOpen && <span>Notifications</span>}
+        </a>
         <div id="conversation-history" hidden={!sidebarOpen}>
+          <p className="sidebar-section-label">Conversations</p>
           <div className="sidebar-history">
             {conversations.map((conversation) => (
               <div
@@ -244,18 +262,22 @@ export default function App() {
                   }
                   onClick={() => void openConversation(conversation.id)}
                 >
-                  <span>
-                    {conversation.title}
-                    <small>
-                      {new Date(
-                        conversation.updated_at * 1000,
-                      ).toLocaleDateString()}
-                    </small>
-                  </span>
-                  <span>→</span>
+                  <span className="conversation-title" title={conversation.title}>{conversation.title}</span>
                 </button>
+                <details className="conversation-actions" onBlur={(event) => {
+                  // Close actions when keyboard focus or a click moves outside this row menu.
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) event.currentTarget.open = false;
+                }} onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.currentTarget.open = false;
+                    event.currentTarget.querySelector("summary")?.focus();
+                  }
+                }}>
+                  <summary aria-label={`Conversation actions for ${conversation.title}`} title="Conversation actions">
+                    <MoreHorizontal size={17} />
+                  </summary>
                 <button
-                  className="icon-button"
+                  className="conversation-delete"
                   disabled={busy}
                   aria-label={`Delete ${conversation.title}`}
                   onClick={async () => {
@@ -275,8 +297,9 @@ export default function App() {
                     }
                   }}
                 >
-                  <X size={15} />
+                  Delete conversation
                 </button>
+                </details>
               </div>
             ))}
             {!conversations.length && (
@@ -286,62 +309,31 @@ export default function App() {
         </div>
       </aside>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Pingo home">
+        <a className="brand" href="/" aria-label="Cloud Help home">
           <span className="brand-icon">
             <MessageCircle size={21} />
           </span>
-          Pingo
+          Cloud Help
           <span className="brand-description">Your IT support companion</span>
         </a>
         <nav aria-label="Chat controls">
           <button
             className="products-button"
+            aria-label="Supported products"
             onClick={() => {
               setModal("products");
               void loadProducts();
             }}
           >
             <span>Supported products</span>
-            <ChevronDown size={15} />
+            <LayoutGrid size={23} />
           </button>
         </nav>
       </header>
       <main className={messages.length ? "conversation" : "conversation empty"}>
         {!messages.length && (
           <section className="welcome">
-            <div className="welcome-icon">
-              <MessageCircle size={32} strokeWidth={1.6} />
-              <span className="spark">✦</span>
-            </div>
-            <div className="eyebrow">A LITTLE HELP GOES A LONG WAY</div>
-            <h1>Let’s get things working.</h1>
-            <p>
-              Tell me what’s happening. We’ll work through it together,
-              <br className="desktop-break" /> one step at a time.
-            </p>
-            <div className="suggestions">
-              {[
-                "My S3 requests return AccessDenied",
-                "Help me troubleshoot a slow EC2 instance",
-                "Why is my Lambda function timing out?",
-              ].map((prompt) => (
-                <button
-                  key={prompt}
-                  onClick={() => void send(prompt)}
-                  disabled={busy}
-                >
-                  {prompt}
-                  <span>↗</span>
-                </button>
-              ))}
-            </div>
-            <button
-              className="text-button"
-              onClick={() => setModal("products")}
-            >
-              Explore {products.length || "our"} supported AWS products{" "}
-              <span>→</span>
-            </button>
+            <h1>What can we help you solve?</h1>
           </section>
         )}
         <section
@@ -357,7 +349,7 @@ export default function App() {
                   <span className="tiny-logo">
                     <MessageCircle size={13} />
                   </span>
-                  Pingo
+                  Cloud Help
                 </div>
               )}
               <div className="message-content">
@@ -382,14 +374,17 @@ export default function App() {
             {status}
           </div>
         )}
+        {messages.length > 0 && <>
+        <SuggestedApplications revision={messages.length} busy={busy} onForget={() => setMemoryRevision(n => n + 1)} />
+        <ApplicationContext
+          product={selected}
+          revision={messages.length + memoryRevision}
+          busy={busy}
+        />
+        </>}
         <div ref={bottom} />
       </main>
       <div className="composer-area">
-        <ApplicationContext
-          product={selected}
-          revision={messages.length}
-          busy={busy}
-        />
         {error && (
           <div className="error" role="alert">
             {error}
@@ -422,10 +417,10 @@ export default function App() {
         >
           <textarea
             ref={textarea}
-            aria-label="Message Pingo"
+            aria-label="Message Cloud Help"
             placeholder="Ask a question or describe an issue…"
             value={input}
-            maxLength={12000}
+            maxLength={2000}
             rows={2}
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={(event) => {
@@ -450,6 +445,9 @@ export default function App() {
               <Plus size={15} />
               {selected ? "Change product" : "Choose a product"}
             </button>
+            <span className="character-count" aria-label="Character count">
+              {input.length} / 2000
+            </span>
             {busy ? (
               <button
                 type="button"
@@ -471,10 +469,25 @@ export default function App() {
             )}
           </div>
         </form>
-        <p className="composer-note">
-          Pingo remembers useful technical context. Ask it to forget anything.
+
+        {!messages.length && (
+          <p className="welcome-description">
+            Cloud Help remembers useful technical context. Ask it to forget anything.
+            Never share passwords or access keys.
+          </p>
+        )}
+        {!messages.length && <>
+        <SuggestedApplications revision={messages.length} busy={busy} onForget={() => setMemoryRevision(n => n + 1)} />
+        <ApplicationContext
+          product={selected}
+          revision={messages.length + memoryRevision}
+          busy={busy}
+        />
+        </>}
+        {messages.length > 0 && <p className="composer-note">
+          Cloud Help remembers useful technical context. Ask it to forget anything.
           Never share passwords or access keys.
-        </p>
+        </p>}
       </div>
       <dialog
         ref={dialog}

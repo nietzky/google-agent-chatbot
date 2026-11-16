@@ -807,3 +807,280 @@ nav {
     display: none;
   }
 }
+
+/* Reference-inspired AI Mode: white canvas, blue/teal accents and a central composer. */
+:root {
+  --purple: #0088ff;
+  --border: #e5e5ea;
+  --muted: #8e8e93;
+  color: #1c1c1e;
+  background: #fff;
+  font-family: Arial, system-ui, sans-serif;
+}
+.topbar {
+  border-bottom: 0;
+  background: #fff;
+}
+.brand {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+.brand-icon,
+.tiny-logo {
+  background: linear-gradient(135deg, #0088ff, #00c3d0);
+}
+.brand-description {
+  display: none;
+}
+.products-button {
+  border: 0;
+  padding: 10px;
+  color: #0088ff;
+}
+.products-button > span {
+  display: none;
+}
+.chat-sidebar {
+  background: #fafafa;
+  border-color: #e5e5ea;
+}
+.sidebar-toggle {
+  color: #707078;
+}
+.sidebar-toggle:hover,
+.sidebar-history .history-row:hover {
+  background: #f2f2f7;
+}
+.sidebar-history .history-row.active {
+  background: #eaf5ff;
+}
+.sidebar-new {
+  border-color: #e5e5ea;
+}
+.welcome-mode .conversation.empty {
+  flex: 0;
+  min-height: 0;
+  padding: 0;
+  margin-top: clamp(90px, 19vh, 220px);
+  margin-bottom: 32px;
+}
+.welcome h1 {
+  display: inline-block;
+  margin: 0;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  background: linear-gradient(105deg, #1670db 12%, #0088ff 45%, #00a8a9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.welcome-mode .composer-area {
+  position: relative;
+  bottom: auto;
+  margin-bottom: auto;
+  padding-bottom: 34px;
+}
+.composer-area {
+  background: linear-gradient(transparent, #fff 14px);
+}
+.composer {
+  border: 1px solid #d1d1d6;
+  border-radius: 24px;
+  box-shadow: 0 3px 9px #00000008;
+  padding: 23px;
+}
+.composer:focus-within {
+  border-color: #0088ff;
+  box-shadow: 0 0 0 3px #0088ff0c;
+}
+.welcome-mode .composer textarea {
+  min-height: 75px;
+}
+.composer textarea {
+  color: #1c1c1e;
+}
+.composer textarea::placeholder {
+  color: #8e8e93;
+}
+.composer-bottom {
+  gap: 12px;
+}
+.context-button {
+  color: #707078;
+}
+.character-count {
+  margin-left: auto;
+  color: #8e8e93;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.send-button {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background: #0088ff;
+}
+.send-button:disabled {
+  background: #d1d1d6;
+  color: white;
+}
+.welcome-description {
+  text-align: center;
+  color: #737379;
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 22px auto;
+  max-width: 600px;
+}
+.application-context {
+  margin-top: 18px;
+  margin-bottom: 0;
+  border-color: #eeeef0;
+  background: #fcfcfd;
+}
+.context-chips > span {
+  background: #eaf5ff;
+  color: #22669d;
+}
+.product-context {
+  color: #22669d;
+}
+.message.user {
+  background: #edf7ff;
+  border-color: #e1effb;
+}
+@media (max-width: 640px) {
+  .welcome-mode .conversation.empty {
+    margin-top: 12vh;
+    margin-bottom: 24px;
+  }
+  .welcome h1 {
+    font-size: 48px;
+  }
+  .composer {
+    padding: 18px;
+    border-radius: 20px;
+  }
+  .welcome-description {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  .character-count {
+    font-size: 10px;
+  }
+  .context-button {
+    font-size: 10px;
+  }
+}
+
+.suggested-applications { margin: 18px 0; font-size: 13px; color: #424650; }
+.suggested-applications > strong { display: flex; gap: 12px; align-items: center; }
+.suggested-applications small { font-weight: normal; color: #727782; }
+.suggested-app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+.suggested-app-grid article { border: 1px solid #e5e5ea; border-radius: 14px; padding: 14px; background: #fafcfe; }
+.suggested-app-grid a { color: #086ac5; font-weight: 600; }
+.suggested-app-grid p { line-height: 1.5; }
+.suggested-app-grid summary { cursor: pointer; color: #086ac5; }
+.app-evidence blockquote { margin: 8px 0; border-left: 2px solid #00c3d0; padding-left: 8px; overflow-wrap: anywhere; }
+.app-evidence button { display: block; margin-top: 8px; font-size: 12px; text-decoration: underline; }
+
+/* Reserve a real bottom row for the composer: it never overlays the transcript.
+   Suggestions and saved context scroll with the conversation after the first turn. */
+.app.has-messages { height: 100dvh; min-height: 0; overflow: hidden; }
+.has-messages .topbar { flex-shrink: 0; }
+.has-messages .conversation {
+  flex: 1 1 0; min-height: 0; overflow-y: auto;
+  overscroll-behavior: contain; padding-bottom: 24px;
+}
+.has-messages .composer-area {
+  position: relative; bottom: auto; flex: 0 0 auto;
+  background: #fff; padding-top: 8px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+.has-messages .composer { padding: 14px 18px; }
+.has-messages .composer-note { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .has-messages .composer { padding: 10px 12px; }
+  .has-messages .composer-note { font-size: 10px; }
+}
+
+/* The complete app catalog has its own URL and never depends on remembered interests. */
+.app-center-link { display: flex; align-items: center; gap: 10px; padding: 12px; color: #086ac5; text-decoration: none; border-radius: 10px; }
+.app-center-link:hover { background: #eaf5ff; }
+.app-center-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 5%; border-bottom: 1px solid #e5e5ea; }
+.app-center-header a { display: flex; gap: 8px; align-items: center; text-decoration: none; }
+.app-center-header span { font-weight: 700; }
+.app-center-content { max-width: 1120px; padding: 40px 24px 64px; margin: auto; }
+.app-center-title { display: flex; align-items: center; gap: 14px; color: #086ac5; }
+.app-center-title h1 { margin: 0; font-size: 36px; }
+.app-center-disclaimer { color: #666b75; line-height: 1.6; }
+.app-center-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; margin-top: 24px; }
+.app-center-grid article { display: flex; flex-direction: column; padding: 24px; border: 1px solid #e5e5ea; border-radius: 18px; background: #fafcfe; }
+.app-center-grid h2 { font-size: 20px; margin: 16px 0 0; }
+.app-center-grid h2 a { text-decoration: none; color: #086ac5; }
+.app-center-grid p { line-height: 1.7; color: #515763; }
+.app-center-badge { font-size: 12px; color: #667080; }
+.app-center-details { margin-top: auto; padding-top: 12px; color: #086ac5; }
+
+.notification-refresh { border: 1px solid #d1d1d6; border-radius: 8px; padding: 8px 16px; }
+.notification-severity { align-self: flex-start; font-size: 12px; border-radius: 6px; padding: 4px 8px; background: #eaf5ff; color: #086ac5; }
+.severity-warning { background: #fff4d6; color: #795600; }
+.severity-success { background: #e6f6eb; color: #21663b; }
+
+/* Grok-inspired spatial layout; existing Cloud Help colors, fonts and controls are retained. */
+.chat-sidebar { gap: 6px; }
+.sidebar-toggle { margin-bottom: 18px; }
+.sidebar-new { margin-bottom: 8px; }
+.sidebar-section-label { font-size: 12px; color: var(--muted); padding: 12px 9px 4px; }
+#conversation-history { flex: 1; }
+.welcome-mode .conversation.empty { margin-top: clamp(65px, 16vh, 170px); margin-bottom: 26px; }
+.welcome h1 { font-size: clamp(30px, 3.6vw, 46px); letter-spacing: -1px; }
+.welcome-mode .composer-area { width: min(800px, calc(100% - 40px)); }
+.welcome-description { margin: 18px auto; }
+@media (max-width: 640px) {
+  .welcome-mode .conversation.empty { margin-top: 9vh; }
+  .welcome h1 { font-size: 30px; }
+}
+
+/* Quiet history rows: reveal a single action menu on hover or keyboard focus. */
+.sidebar-history .history-row { position: relative; align-items: center; gap: 0; }
+.sidebar-history .history-row > button:first-child { min-width: 0; padding: 11px 9px; }
+.sidebar-history .conversation-title { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conversation-actions { flex: 0 0 30px; margin-right: 4px; }
+.conversation-actions summary { list-style: none; display: flex; align-items: center; justify-content: center; min-height: 30px; cursor: pointer; border-radius: 6px; opacity: 0; }
+.conversation-actions summary::-webkit-details-marker { display: none; }
+.history-row:hover .conversation-actions summary, .history-row:focus-within .conversation-actions summary, .conversation-actions[open] summary { opacity: 1; }
+.conversation-actions summary:hover { background: #e5e5ea; }
+.conversation-actions[open] { padding-bottom: 0; }
+.conversation-actions[open] > button { z-index: 20; box-shadow: 0 4px 18px #00000018; width: max-content; max-width: calc(100% - 8px); height: auto; min-height: 36px; position: absolute; right: 4px; top: calc(100% - 2px); bottom: auto; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; color: #a72c38; font-size: 12px; white-space: nowrap; }
+@media (hover: none) { .conversation-actions summary { opacity: 1; } }
+
+/* Up to three compact suggestions; expand a card only to inspect its evidence. */
+.suggested-app-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: start; }
+.suggested-app-grid article { min-width: 0; padding: 10px 12px; border-radius: 12px; }
+.suggested-app-grid article > a { display: block; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.suggested-app-grid details { margin-top: 6px; font-size: 12px; }
+.suggested-app-grid details p { margin: 8px 0; }
+@media (max-width: 640px) {
+  .suggested-app-grid { grid-template-columns: 1fr; }
+  .suggested-app-grid article { padding: 9px 12px; }
+}
+
+/* Home content shares one column and a consistent, restrained spacing rhythm. */
+.welcome-mode .conversation.empty { width: min(760px, calc(100% - 40px)); margin-top: clamp(48px, 12vh, 120px); margin-bottom: 24px; }
+.welcome-mode .composer-area { width: min(760px, calc(100% - 40px)); padding: 0 0 24px; display: flex; flex-direction: column; gap: 20px; }
+.welcome-mode .welcome h1 { font-size: clamp(28px, 3.2vw, 40px); line-height: 1.25; }
+.welcome-mode .composer-area > * { margin-top: 0; margin-bottom: 0; }
+.welcome-mode .welcome-description { max-width: none; font-size: 13px; line-height: 1.6; }
+.welcome-mode .suggested-applications > strong { justify-content: space-between; font-size: 13px; font-weight: 500; }
+.welcome-mode .suggested-applications > p { margin-bottom: 0; line-height: 1.6; color: var(--muted); }
+.welcome-mode .application-context { padding: 14px 16px; }
+.welcome-mode .composer-note { text-align: center; font-size: 11px; line-height: 1.6; }
+@media (max-width: 640px) {
+  .welcome-mode .conversation.empty { margin-top: 40px; }
+  .welcome-mode .composer-area { gap: 16px; }
+}
+
+/* Leave room inside the scroll area for the final row's floating action menu. */
+.sidebar-history { padding-bottom: 46px; }

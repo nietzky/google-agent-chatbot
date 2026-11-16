@@ -1,4 +1,4 @@
-# Pingo memory schema
+# Cloud Help memory schema
 
 `data/memory.sqlite3` stores long-term records. ADK event history is separately managed in
 `data/sessions.sqlite3`. Existing preference rows are preserved by additive, idempotent schema
@@ -128,7 +128,7 @@ Structured extraction follows the [OpenAI Structured Outputs guide](https://deve
 
 ## Incident resolution feedback
 
-After a tool-backed answer for an open incident, Pingo appends a conversational check asking
+After a tool-backed answer for an open incident, Cloud Help appends a conversational check asking
 whether the answer solved the issue, helped partially, or left it unresolved. The question is
 saved with the assistant message, so it remains visible when reopening the conversation.
 Users can describe the steps they took and which guidance helped. The memory specialist
@@ -150,7 +150,7 @@ per user/conversation/product constraint remains. No external AWS Support ticket
 
 ## Google ADK long-term memory
 
-Pingo now implements `BaseMemoryService` in `src/chatbot/adk_memory.py` and passes the
+Cloud Help now implements `BaseMemoryService` in `src/chatbot/adk_memory.py` and passes the
 same durable service to both HTTP and CLI ADK runners. The orchestrator uses ADK's
 `load_memory` tool for additional recall. Bounded prompt recall also uses this service.
 
@@ -159,7 +159,7 @@ same durable service to both HTTP and CLI ADK runners. The orchestrator uses ADK
 - `add_session_to_memory`: idempotently queues the latest completed server-recorded turn
   for the existing evidence-based extraction worker. It does not index raw session text.
   The existing completion trigger remains a crash-safe queueing mechanism.
-- `search_memory`: retrieves through the separate `pingo-memory-v1` Elasticsearch collection,
+- `search_memory`: retrieves through the separate `cloudhelp-memory-v1` Elasticsearch collection,
   filters by application/user and selected product, validates against current SQLite facts,
   and returns at most 12 entries within a 6,500-character content budget, including evidence,
   provenance, subject and age. This collection uses BM25 keyword relevance, not embeddings;

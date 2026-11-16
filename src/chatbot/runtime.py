@@ -5,7 +5,7 @@ from contextlib import AsyncExitStack, asynccontextmanager
 from elasticsearch import AsyncElasticsearch
 from openai import AsyncOpenAI
 
-from chatbot.adk_memory import PingoMemoryService
+from chatbot.adk_memory import CloudHelpMemoryService
 from chatbot.memory import MemoryStore
 from chatbot.retrieval import KnowledgeStore
 
@@ -42,7 +42,7 @@ async def resources(settings):
             max_retries=2,
         )
         stack.push_async_callback(client.close)
-        memory.adk_service = PingoMemoryService(memory, APP, es, settings.memory_index)
+        memory.adk_service = CloudHelpMemoryService(memory, APP, es, settings.memory_index)
         stack.push_async_callback(memory.adk_service.close)
         await memory.adk_service.start(settings.memory_db)
         yield memory, KnowledgeStore(es, client, settings)

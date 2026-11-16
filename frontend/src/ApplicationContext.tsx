@@ -7,7 +7,7 @@ function label(value: string) {
 }
 
 /**
- * Show saved context available to Pingo, grouped by its recorded application/subject.
+ * Show saved context available to Cloud Help, grouped by its recorded application/subject.
  * Refresh after conversation changes and briefly poll outstanding extraction jobs. Requests
  * are cancelled on cleanup; a failed refresh hides stale facts instead of implying freshness.
  * Product filtering here changes only the display, not the backend's memory selection.
@@ -81,9 +81,9 @@ export default function ApplicationContext({ product, revision, busy }: {
             <span className="context-count">{visible.length} saved {visible.length === 1 ? "detail" : "details"} · View</span>
           </summary>
           <div className="context-details">
-            <p>Saved context available to Pingo. Each answer may use a subset.
+            <p>Saved context available to Cloud Help. Each answer may use a subset.
               {product && ` Showing general details and ${product.name} context.`}
-              {" "}Ask Pingo to correct or forget anything.</p>
+              {" "}Ask Cloud Help to correct or forget anything.</p>
             {[...groups].map(([subject, facts]) => (
               <div className="context-group" key={subject}>
                 <h3>{label(subject)}</h3>
@@ -98,7 +98,7 @@ export default function ApplicationContext({ product, revision, busy }: {
             ))}
           </div>
         </details>
-      ) : <p>{product ? "No saved context for this product yet." : "No saved application context yet."} Tell Pingo about your app, stack, or environment as you chat.</p>)}
+      ) : <p>{product ? "No saved context for this product yet." : "No saved application context yet."} Tell Cloud Help about your app, stack, or environment as you chat.</p>)}
       {learning && <p role="status">Learning from recent conversations… Refresh to check again.</p>}
     </section>
   );

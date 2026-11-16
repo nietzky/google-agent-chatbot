@@ -21,7 +21,7 @@ from chatbot.config import Settings
 from chatbot.runtime import resources
 
 ROOT = Path("knowledge/aws")
-INDEX = "pingo-products-openai-v1"
+INDEX = "cloudhelp-products-openai-v1"
 EXTRA_PAGES = {
     "s3": ["https://docs.aws.amazon.com/AmazonS3/latest/userguide/troubleshoot-403-errors.html"],
     "lambda": ["https://docs.aws.amazon.com/lambda/latest/dg/configuration-timeout.html"],
@@ -115,7 +115,7 @@ async def main():
     async with httpx.AsyncClient(
         follow_redirects=True,
         timeout=45,
-        headers={"User-Agent": "Pingo-local-documentation-importer/1.0"},
+        headers={"User-Agent": "Cloud Help-local-documentation-importer/1.0"},
         limits=httpx.Limits(max_connections=4),
     ) as client:
         _, catalog = await page(client, "https://docs.aws.amazon.com/")

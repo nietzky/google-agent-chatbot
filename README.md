@@ -1,6 +1,6 @@
-# Pingo â€” IT support with AWS product knowledge
+# Cloud Help â€” IT support with AWS product knowledge
 
-Pingo is a local React + FastAPI support chatbot powered by **Google ADK** agents and
+Cloud Help is a local React + FastAPI support chatbot powered by **Google ADK** agents and
 **OpenAI** models. It helps troubleshoot AWS incidents and answers general IT questions.
 Elasticsearch provides hybrid retrieval; SQLite retains preferences, product interactions,
 retrieved evidence, incidents, and conversation history.
@@ -70,7 +70,7 @@ is capped at 60,000 characters; truncation is recorded. Previously imported page
 when selection expands. The manifest records source URLs, timestamps, hashes, product IDs,
 and chunk counts. Resume checks each product's indexed chunk count; `--refresh` fetches anew.
 
-The active index is `pingo-products-openai-v1`. Model/dimension metadata prevents accidental
+The active index is `cloudhelp-products-openai-v1`. Model/dimension metadata prevents accidental
 comparison across incompatible embeddings. Reuse stable source IDs to replace pages and remove
 obsolete tail chunks. `restore_aws.py` verifies all snapshot hashes before embedding anything.
 OpenAI generation and embedding calls require network access and incur usage charges.
@@ -88,7 +88,7 @@ status, and timestamps. Retrieved source/chunk/rank/score rows link back to that
 records track open/resolved state, user evidence, and confirmed resolutions when the memory
 specialist records them. Suggestions must not be stored as confirmed fixes.
 
-Pingo now automatically extracts useful technical context after each completed reply:
+Cloud Help now automatically extracts useful technical context after each completed reply:
 application stacks, versions, deployment tools/regions, constraints, product usage, learning
 interests, recurring symptoms, and confirmed fixes. It saves evidence-backed facts in the
 **`memories` table** without requiring a “remember this” request. A question about a product
@@ -100,7 +100,7 @@ on failure. Pending jobs survive restarts. `GET /api/memories/status` shows queu
 Set `AUTO_MEMORY_ENABLED=false` to stop extraction; `MEMORY_EXTRACTION_MODEL` defaults to
 `gpt-4.1-mini`. This feature starts with new completed replies, not historical backfill.
 
-You can still ask Pingo to remember/correct/forget a preference, record an incident, or recall
+You can still ask Cloud Help to remember/correct/forget a preference, record an incident, or recall
 product history. Learning means saving and recalling data, not changing model weights. Inspect history
 at `/api/product-history?product_id=s3`; preferences are at `/api/memories`. Deleting a chat
 also removes its interaction/retrieval/incident rows and automatic facts derived from them;
@@ -123,7 +123,7 @@ credential profile with read-only permissions. Configure `.env`:
 
 ```dotenv
 AWS_DIAGNOSTICS_ENABLED=true
-AWS_PROFILE=pingo-readonly
+AWS_PROFILE=cloud-help-readonly
 AWS_REGION=us-east-1
 ```
 
@@ -181,7 +181,7 @@ public AWS Knowledge MCP, the local diagnostics MCP, and persisted product evide
 
 ## Public Azure and Microsoft documentation
 
-Pingo connects to Microsoft's public Learn MCP server at `https://learn.microsoft.com/api/mcp`
+Cloud Help connects to Microsoft's public Learn MCP server at `https://learn.microsoft.com/api/mcp`
 through Google ADK's Streamable HTTP MCP client. A dedicated `azure_knowledge_agent` discovers
 and uses `microsoft_docs_search`, `microsoft_docs_fetch`, and `microsoft_code_sample_search`.
 Ask Azure questions directly in chat; the orchestrator delegates and returns Microsoft source links.
@@ -202,3 +202,5 @@ web and CLI runners. Explicit memory tools write `MemoryEntry` objects; automati
 keeps selecting evidence-backed facts after successful replies. ADK `load_memory` and prompt
 recall search a dedicated Elasticsearch memory index with SQLite validation/fallback.
 See [memory implementation and limits](docs/memory.md#google-adk-long-term-memory).
+
+See [application suggestions](docs/application-suggestions.md) for the fictional catalog and evidence-backed recommendations.

@@ -1,0 +1,82 @@
+{
+  "demo-s3": {
+    "title": "Bucket access review",
+    "description": "Demo: Review an example S3 bucket policy for denied object access.",
+    "product_id": "s3",
+    "severity": "warning",
+    "created_at": "2026-11-15T10:00:00Z",
+    "demo": true
+  },
+  "demo-ec2": {
+    "title": "Instance health check",
+    "description": "Demo: An example EC2 instance is ready for a connectivity check.",
+    "product_id": "ec2",
+    "severity": "info",
+    "created_at": "2026-11-15T11:00:00Z",
+    "demo": true
+  },
+  "demo-lambda": {
+    "title": "Function timeout alert",
+    "description": "Demo: A sample Lambda invocation exceeded its configured timeout.",
+    "product_id": "lambda",
+    "severity": "warning",
+    "created_at": "2026-11-15T12:00:00Z",
+    "demo": true
+  },
+  "demo-rds": {
+    "title": "Database maintenance reminder",
+    "description": "Demo: Review the maintenance settings for an example RDS database.",
+    "product_id": "rds",
+    "severity": "info",
+    "created_at": "2026-11-15T13:00:00Z",
+    "demo": true
+  },
+  "demo-dynamodb": {
+    "title": "Table capacity review",
+    "description": "Demo: A sample DynamoDB table shows throttled requests.",
+    "product_id": "dynamodb",
+    "severity": "warning",
+    "created_at": "2026-11-15T14:00:00Z",
+    "demo": true
+  },
+  "demo-eks": {
+    "title": "Cluster troubleshooting guide",
+    "description": "Demo: New example guidance is available for EKS pod scheduling.",
+    "product_id": "eks",
+    "severity": "info",
+    "created_at": "2026-11-15T15:00:00Z",
+    "demo": true
+  },
+  "demo-ecs": {
+    "title": "Deployment check complete",
+    "description": "Demo: An example ECS deployment health check completed successfully.",
+    "product_id": "ecs",
+    "severity": "success",
+    "created_at": "2026-11-15T16:00:00Z",
+    "demo": true
+  },
+  "demo-cloudwatch": {
+    "title": "Alarm configuration review",
+    "description": "Demo: Check the threshold on a sample CloudWatch alarm.",
+    "product_id": "cloudwatch",
+    "severity": "info",
+    "created_at": "2026-11-15T17:00:00Z",
+    "demo": true
+  },
+  "demo-iam": {
+    "title": "Role permission reminder",
+    "description": "Demo: Review an example IAM role trust policy.",
+    "product_id": "iam",
+    "severity": "warning",
+    "created_at": "2026-11-15T18:00:00Z",
+    "demo": true
+  },
+  "demo-vpc": {
+    "title": "Network check complete",
+    "description": "Demo: A sample VPC route review completed successfully.",
+    "product_id": "vpc",
+    "severity": "success",
+    "created_at": "2026-11-15T19:00:00Z",
+    "demo": true
+  }
+}
